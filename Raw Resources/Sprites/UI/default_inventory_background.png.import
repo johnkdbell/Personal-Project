@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/item_slot_default_background.png-192b488be66e04a47ead95fd42103122.stex"
+path="res://.import/default_inventory_background.png-1da7d2c9ce620d3e75baa498d752dc47.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Raw Resources/Sprites/UI/Inventory/item_slot_default_background.png"
-dest_files=[ "res://.import/item_slot_default_background.png-192b488be66e04a47ead95fd42103122.stex" ]
+source_file="res://Raw Resources/Sprites/UI/default_inventory_background.png"
+dest_files=[ "res://.import/default_inventory_background.png-1da7d2c9ce620d3e75baa498d752dc47.stex" ]
 
 [params]
 

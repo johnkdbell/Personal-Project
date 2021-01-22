@@ -1,10 +1,10 @@
 extends Panel
 
-var default_tex = preload("res://Raw Resources/Sprites/UI/Inventory/item_slot_default_background.png");
-var empty_tex = preload("res://Raw Resources/Sprites/UI/Inventory/item_slot_empty_background.png");
+var default_tex = preload("res://Raw Resources/Sprites/UI/item_slot_default_background.png")
+var empty_tex = preload("res://Raw Resources/Sprites/UI/item_slot_empty_background.png")
 
-var default_style: StyleBoxTexture = null;
-var empty_style: StyleBoxTexture = null;
+var default_style: StyleBoxTexture = null
+var empty_style: StyleBoxTexture = null
 
 var ItemClass = preload("res://UI/Inventory/Item.tscn")
 var item = null
@@ -16,9 +16,9 @@ func _ready():
 	default_style.texture = default_tex
 	empty_style.texture = empty_tex
 	
-	if randi() % 2 == 0:
-		item = ItemClass.instance()
-		add_child(item)
+#	if randi() % 2 == 0:
+#		item = ItemClass.instance()
+#		add_child(item)
 	refresh_style()
 		
 func refresh_style():
@@ -50,3 +50,4 @@ func initialize_item(item_name, item_quantity):
 	else:
 		item.set_item(item_name, item_quantity)
 	refresh_style()
+

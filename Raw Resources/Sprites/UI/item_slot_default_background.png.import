@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Iron Sword.png-b1ace445217f56f42e18107a2b6b0235.stex"
+path="res://.import/item_slot_default_background.png-11853693ac30691aa926b68a07ac09b3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Inventory/Item Icons/Iron Sword.png"
-dest_files=[ "res://.import/Iron Sword.png-b1ace445217f56f42e18107a2b6b0235.stex" ]
+source_file="res://Raw Resources/Sprites/UI/item_slot_default_background.png"
+dest_files=[ "res://.import/item_slot_default_background.png-11853693ac30691aa926b68a07ac09b3.stex" ]
 
 [params]
 

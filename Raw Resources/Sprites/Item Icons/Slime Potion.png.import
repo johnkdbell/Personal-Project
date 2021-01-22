@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/item_slot_empty_background.png-14595d732966a69804a20f29f25c2d1f.stex"
+path="res://.import/Slime Potion.png-e89bd916c50f7a3e8ff9dff64cb7d701.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Raw Resources/Sprites/UI/Inventory/item_slot_empty_background.png"
-dest_files=[ "res://.import/item_slot_empty_background.png-14595d732966a69804a20f29f25c2d1f.stex" ]
+source_file="res://Raw Resources/Sprites/Item Icons/Slime Potion.png"
+dest_files=[ "res://.import/Slime Potion.png-e89bd916c50f7a3e8ff9dff64cb7d701.stex" ]
 
 [params]
 

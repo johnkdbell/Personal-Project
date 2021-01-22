@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-export var ACCELERATION = 20;
-export var MAX_SPEED = 1000;
+export var ACCELERATION = 300;
+export var MAX_SPEED = 50;
 export var FRICTION = 200;
 
 enum {
@@ -21,6 +21,7 @@ onready var stats = $Stats;
 func _ready():
 	state = pick_random_state([IDLE, WANDER]);
 	print("POOP")
+	
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta);

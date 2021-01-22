@@ -1,44 +1,31 @@
 extends KinematicBody2D
 
-#const player_stats = preload("res://Entities/Player/Player.gd")
+export var ACCELERATION = 460
+export var MAX_SPEED = 225
+export var FRICTION = 200;
 
-export var ACCELERATION = 100;
-export var MAX_SPEED 	= 200;
-export var FRICTION 	= 10000;
+var velocity = Vector2.ZERO
+var item_name
 
-enum {
-	IDLE,
-	CHASE
-}
-
-var item_name;
-var velocity 	= Vector2.ZERO;
-var state 		= CHASE;
-
-onready var playerDetection = $PlayerDetection;
+var player = null
+var being_picked_up = false
 
 func _ready():
-	item_name = "Slime Potion";
+	item_name = "Slime Potion"
 	
 func _physics_process(delta):
-	match state:
-		IDLE:
-			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta);
-			seek_player();
+	if being_picked_up == false:
+		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta);
+	else:
+		var direction = global_position.direction_to(player.global_position);
+		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta);
+		
+		var distance = global_position.distance_to(player.global_position)
+		if distance < 4:
+			PlayerInventory.add_item(item_name, 1)
+			queue_free()
+	velocity = move_and_slide(velocity)
 
-		CHASE:
-			var player = playerDetection.player;
-			if player != null:
-				move_towards_point(player.global_position, delta)
-			else:
-				state = IDLE;
-			
-	velocity = move_and_slide(velocity);
-
-func seek_player():
-	if playerDetection.can_see_player():
-		state = CHASE;
-	
-func move_towards_point(area, delta):
-	var direction = global_position.direction_to(area);
-	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta);
+func pick_up_item(body):
+	player = body
+	being_picked_up = true

@@ -1,12 +1,13 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://UI/Inventory/Item.gd" type="Script" id=1]
-[ext_resource path="res://UI/Inventory/Item Icons/Iron Sword.png" type="Texture" id=2]
+[ext_resource path="res://Raw Resources/Sprites/Item Icons/Iron Sword.png" type="Texture" id=2]
 [ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 outline_size = 1
-outline_color = Color( 0.0666667, 0.0666667, 0.0666667, 1 )
+outline_color = Color( 0.0751953, 0.0751953, 0.0751953, 1 )
+extra_spacing_char = 1
 font_data = ExtResource( 3 )
 
 [node name="Item" type="Node2D"]
@@ -23,15 +24,16 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="."]
-margin_left = 8.75
-margin_top = 10.0
-margin_right = 24.75
+margin_left = 11.0
+margin_top = 9.0
+margin_right = 28.0
 margin_bottom = 23.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = SubResource( 1 )
 text = "99"
 align = 2
 valign = 1
+percent_visible = -0.5
 __meta__ = {
 "_edit_use_anchors_": false
 }
