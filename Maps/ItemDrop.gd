@@ -1,17 +1,16 @@
 extends KinematicBody2D
 
-export var ACCELERATION = 500
-export var MAX_SPEED = 500
+export var ACCELERATION = 900;
+export var MAX_SPEED = 1000;
 export var FRICTION = 1.05;
+export var ITEM_NAME = "NULL";
+export var ITEM_QUANTITY = 1;
+
 
 var velocity = Vector2.ZERO
-var item_name
 
 var player = null
 var being_picked_up = false
-
-func _ready():
-	item_name = "Slime Potion"
 	
 func _physics_process(delta):
 	if being_picked_up == false && Input.is_action_just_released("pickup"):
@@ -24,14 +23,12 @@ func _physics_process(delta):
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta);
 		
 		var distance = global_position.distance_to(player.global_position)
-		if distance < 4:
-			PlayerInventory.add_item(item_name, 1)
+		if distance < 10:
+			PlayerInventory.add_item(ITEM_NAME, ITEM_QUANTITY)
 			queue_free()
 			
 	velocity = move_and_slide(velocity / FRICTION)
 	
-	
-
 func pick_up_item(body):
 	player = body
 	being_picked_up = true

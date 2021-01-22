@@ -8,9 +8,6 @@
 [ext_resource path="res://Entities/Player/Hurtbox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Entities/Player/Stats.tscn" type="PackedScene" id=7]
 
-
-
-
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 16, 16 )
