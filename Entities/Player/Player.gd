@@ -16,12 +16,18 @@ var state = MOVE;
 var velocity = Vector2.ZERO
 var player_bullet := preload("res://Entities/Player/Weapons/Projectiles/Bullet.tscn");
 var roll_vector = Vector2.DOWN;
+var is_move = true;
 
 onready var	animationPlayer = $AnimationPlayer;
 onready var animationTree = $AnimationTree;
 onready var animationState = animationTree.get("parameters/playback");
 onready var projectileDelayTimer := $ProjectileDelayTimer;
 onready var meleeHitbox = $HitboxPivot/MeleeHitbox;
+onready var pickupZone = $PickupZone;
+onready var pickupZoneCollision = $PickupZone/CollisionShape2D;
+
+func get_state(state):
+	return state;
 
 func _ready():
 	animationTree.active = true;
@@ -29,6 +35,18 @@ func _ready():
 	randomize();
 
 func _physics_process(delta):
+	var press = 0;
+	
+	if Input.is_action_just_pressed("pickup"):
+		press += 1;
+		print("Pickup Pressed - ", press)
+		fuck(press);
+			
+	if Input.is_action_just_released("pickup"):
+		press -= 1;
+		print("Pickup Released - ", press);
+		fuck(press);
+			
 	match state:
 		MOVE:
 			move_state(delta);
@@ -56,6 +74,7 @@ func move_state(delta):
 		state = ATTACK;
 	
 	if input_vector != Vector2.ZERO:
+		is_move = true;		
 		roll_vector = input_vector;
 		meleeHitbox.knockback_vector = input_vector;
 		animationTree.set("parameters/Idle/blend_position", input_vector);
@@ -65,6 +84,7 @@ func move_state(delta):
 		velocity = lerp(velocity, input_vector.normalized() * MAX_SPEED, ACCELERATION * delta);
 	else:
 		animationState.travel("Idle");
+		is_move = false;
 		velocity = lerp(velocity, Vector2.ZERO, FRICTION)
 	
 func apply_movement(delta):
@@ -91,9 +111,14 @@ func spawn_arrow():
 		bullet.position = position;
 		get_tree().current_scene.add_child(bullet);
 
-func _input(event):
-	if event.is_action_pressed("pickup"):
-		if $PickupZone.items_in_range.size() > 0:
-			var pickup_item = $PickupZone.items_in_range.values()[0]
+func fuck(fucker):
+	if fucker == 1:
+		if pickupZone.items_in_range.size() > 0:
+			var pickup_item = pickupZone.items_in_range.values()[0]
 			pickup_item.pick_up_item(self)
-			$PickupZone.items_in_range.erase(pickup_item)
+			pickupZone.items_in_range.erase(pickup_item)
+	elif fucker == -1:		
+		if pickupZone.items_in_range.size() > 0:
+			var pickup_item = pickupZone.items_in_range.values()[0]
+			pickup_item.pick_up_item(self)
+			pickupZone.items_in_range.erase(pickup_item)

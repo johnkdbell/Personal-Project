@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://Raw Resources/Sprites/Shit Sprites/Plop.png" type="Texture" id=1]
 [ext_resource path="res://Entities/Player/Player.gd" type="Script" id=2]
@@ -16,131 +16,131 @@
 radius = 7.40728
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 24, 36 )
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 5 )
 region = Rect2( 24, 0, 24, 36 )
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 5 )
 region = Rect2( 48, 0, 24, 36 )
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 5 )
 region = Rect2( 72, 0, 24, 36 )
 
 [sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 5 )
 region = Rect2( 96, 0, 24, 36 )
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 5 )
 region = Rect2( 120, 0, 24, 36 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 6 )
 region = Rect2( 0, 0, 24, 36 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 6 )
 region = Rect2( 24, 0, 24, 36 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 6 )
 region = Rect2( 48, 0, 24, 36 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 6 )
 region = Rect2( 72, 0, 24, 36 )
 
 [sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 6 )
 region = Rect2( 96, 0, 24, 36 )
 
 [sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 6 )
 region = Rect2( 120, 0, 24, 36 )
 
 [sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 16, 16 )
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 24, 36 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 24, 36 )
+region = Rect2( 24, 0, 24, 36 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 4 )
-region = Rect2( 24, 0, 24, 36 )
+region = Rect2( 48, 0, 24, 36 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 4 )
-region = Rect2( 48, 0, 24, 36 )
+region = Rect2( 72, 0, 24, 36 )
 
 [sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 4 )
-region = Rect2( 72, 0, 24, 36 )
+region = Rect2( 96, 0, 24, 36 )
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 4 )
-region = Rect2( 96, 0, 24, 36 )
+region = Rect2( 120, 0, 24, 36 )
 
 [sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 4 )
-region = Rect2( 120, 0, 24, 36 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 6 )
+atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 24, 36 )
 
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 6 )
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 3 )
 region = Rect2( 24, 0, 24, 36 )
 
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 6 )
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 3 )
 region = Rect2( 48, 0, 24, 36 )
 
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 6 )
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 3 )
 region = Rect2( 72, 0, 24, 36 )
 
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 6 )
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 3 )
 region = Rect2( 96, 0, 24, 36 )
 
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 6 )
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 3 )
 region = Rect2( 120, 0, 24, 36 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=27]
 animations = [ {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
 "loop": true,
-"name": "walk_right",
+"name": "walk_up",
 "speed": 8.0
 }, {
 "frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
 "loop": true,
-"name": "walk_up",
+"name": "walk_down",
 "speed": 8.0
 }, {
-"frames": [ SubResource( 14 ) ],
-"loop": true,
-"name": "plop",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
 "loop": true,
 "name": "walk_left",
 "speed": 8.0
 }, {
-"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ) ],
+"frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ) ],
 "loop": true,
-"name": "walk_down",
+"name": "walk_right",
 "speed": 8.0
+}, {
+"frames": [ SubResource( 26 ) ],
+"loop": true,
+"name": "plop",
+"speed": 5.0
 } ]
 
 [sub_resource type="Animation" id=28]
@@ -649,6 +649,9 @@ animations = [ {
 radius = 10.9999
 height = 18.0001
 
+[sub_resource type="CircleShape2D" id=65]
+radius = 112.134
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 2 )
@@ -703,6 +706,7 @@ animation = "shadow"
 frame = 1
 
 [node name="HitboxPivot" type="Position2D" parent="."]
+visible = false
 position = Vector2( 4, 0 )
 rotation = 3.14159
 
@@ -723,11 +727,14 @@ disabled = true
 one_shot = true
 
 [node name="PickupZone" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 4
 script = ExtResource( 11 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupZone"]
+visible = false
+shape = SubResource( 65 )
 [connection signal="body_entered" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_exited"]
 

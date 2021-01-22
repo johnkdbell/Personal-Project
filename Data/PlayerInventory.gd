@@ -6,9 +6,6 @@ const NUM_INVENTORY_SLOTS = 20
 
 var inventory = {
 	0: ["Iron Sword", 1],  #--> slot_index: [item_name, item_quantity]
-	1: ["Iron Sword", 1],  #--> slot_index: [item_name, item_quantity]
-	2: ["Slime Potion", 98],
-	3: ["Slime Potion", 45],
 }
 
 func add_item(item_name, item_quantity):
