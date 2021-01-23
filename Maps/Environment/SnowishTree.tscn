@@ -3,6 +3,8 @@
 [ext_resource path="res://Raw Resources/Sprites/World/SnowishTreeTop.png" type="Texture" id=1]
 [ext_resource path="res://Raw Resources/Sprites/World/TreeWood.png" type="Texture" id=2]
 
+
+
 [sub_resource type="RectangleShape2D" id=1]
 
 [node name="SnowTree" type="Node2D"]

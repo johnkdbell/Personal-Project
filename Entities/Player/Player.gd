@@ -26,27 +26,12 @@ onready var meleeHitbox = $HitboxPivot/MeleeHitbox;
 onready var pickupZone = $PickupZone;
 onready var pickupZoneCollision = $PickupZone/CollisionShape2D;
 
-func get_state(state):
-	return state;
-
 func _ready():
 	animationTree.active = true;
 	meleeHitbox.knockback_vector = roll_vector;
 	randomize();
 
 func _physics_process(delta):
-	var press = 0;
-	
-	if Input.is_action_just_pressed("pickup"):
-		press += 1;
-		print("Pickup Pressed - ", press)
-		fuck(press);
-			
-	if Input.is_action_just_released("pickup"):
-		press -= 1;
-		print("Pickup Released - ", press);
-		fuck(press);
-			
 	match state:
 		MOVE:
 			move_state(delta);
@@ -60,10 +45,19 @@ func _physics_process(delta):
 			apply_movement(delta);
 	
 func move_state(delta):
+	var absorption_press = 0;
 	var input_vector = Vector2.ZERO;	
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left");
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up");
 	input_vector = input_vector.normalized();
+	
+	if Input.is_action_just_pressed("pickup"):
+		absorption_press += 1;
+		fuck(absorption_press);
+			
+	if Input.is_action_just_released("pickup"):
+		absorption_press -= 1;
+		fuck(absorption_press);
 	
 	if Input.is_action_pressed("right_mouse_button"):
 		if Input.is_action_just_pressed("shoot"):
@@ -74,7 +68,7 @@ func move_state(delta):
 		state = ATTACK;
 	
 	if input_vector != Vector2.ZERO:
-		is_move = true;		
+		is_move = true;
 		roll_vector = input_vector;
 		meleeHitbox.knockback_vector = input_vector;
 		animationTree.set("parameters/Idle/blend_position", input_vector);
@@ -85,10 +79,10 @@ func move_state(delta):
 	else:
 		animationState.travel("Idle");
 		is_move = false;
-		velocity = lerp(velocity, Vector2.ZERO, FRICTION)
+		velocity = lerp(velocity, Vector2.ZERO, FRICTION);
 	
 func apply_movement(delta):
-	velocity = move_and_slide(velocity)
+	velocity = move_and_slide(velocity);
 	
 func attack_state(delta):
 	animationState.travel("Attack");

@@ -68,8 +68,6 @@ func seek_player():
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage;
 	knockback = get_global_mouse_position() * 0.75;
-	print(area.damage)
-	print("ENTERED HURTBOX")
 	
 func _on_Stats_no_health():
 	queue_free();

@@ -4057,6 +4057,7 @@ position = Vector2( -536, 480 )
 [node name="ItemDrop" parent="YSort/Items (YSort)" instance=ExtResource( 9 )]
 position = Vector2( -168, -96 )
 ITEM_NAME = "Slime Potion"
+FLOATING_TAB = true
 
 [node name="Shadow" parent="YSort/Items (YSort)/ItemDrop" index="0"]
 modulate = Color( 1, 1, 1, 0.588235 )
@@ -4067,9 +4068,13 @@ texture = ExtResource( 13 )
 [node name="Sprite" parent="YSort/Items (YSort)/ItemDrop" index="1"]
 texture = ExtResource( 3 )
 
+[node name="Tab" parent="YSort/Items (YSort)/ItemDrop" index="6"]
+frame = 0
+
 [node name="ItemDrop2" parent="YSort/Items (YSort)" instance=ExtResource( 9 )]
 position = Vector2( 264, 64 )
 ITEM_NAME = "Slime Potion"
+FLOATING_TAB = true
 
 [node name="Shadow" parent="YSort/Items (YSort)/ItemDrop2" index="0"]
 modulate = Color( 1, 1, 1, 0.588235 )
@@ -4079,6 +4084,9 @@ texture = ExtResource( 13 )
 
 [node name="Sprite" parent="YSort/Items (YSort)/ItemDrop2" index="1"]
 texture = ExtResource( 3 )
+
+[node name="Tab" parent="YSort/Items (YSort)/ItemDrop2" index="6"]
+frame = 0
 
 [node name="YSort" type="YSort" parent="YSort"]
 

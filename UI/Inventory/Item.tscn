@@ -33,7 +33,6 @@ custom_fonts/font = SubResource( 1 )
 text = "99"
 align = 2
 valign = 1
-percent_visible = -0.5
 __meta__ = {
 "_edit_use_anchors_": false
 }
