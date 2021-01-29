@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Raw Resources/Sprites/World/Background/SnowGrass.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://UI/Inventory/Inventory.tscn" type="PackedScene" id=11]
 [ext_resource path="res://UI/UserInterface.gd" type="Script" id=12]
 [ext_resource path="res://Raw Resources/Sprites/Shadows/SmallShadow.png" type="Texture" id=13]
+[ext_resource path="res://Raw Resources/Sprites/World/House.png" type="Texture" id=14]
 
 [sub_resource type="TileSet" id=1]
 0/name = "SnowTileset.png 0"
@@ -40,10 +41,36 @@
 0/z_index = 0
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 80, 128 )
+extents = Vector2( 62, 10 )
 
 [sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 73, 10 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 73, 10 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 4, 25 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 64, 10 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 64, 6 )
+
+[sub_resource type="RectangleShape2D" id=8]
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 10, 122 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 80, 63.2333 )
+
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 519.957, 39.9611 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 384, 109 )
 
 [node name="World" type="Node2D"]
 
@@ -93,47 +120,95 @@ drag_margin_top = 0.0
 drag_margin_right = 0.0
 drag_margin_bottom = 0.0
 
+[node name="House Collision" type="StaticBody2D" parent="YSort"]
+collision_mask = 23
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="YSort/House Collision"]
+position = Vector2( -20, -648 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="YSort/House Collision"]
+position = Vector2( -154, -644 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/House Collision"]
+position = Vector2( 114, -644 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="YSort/House Collision"]
+position = Vector2( -20, -653 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="YSort/House Collision"]
+position = Vector2( -163, -636 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="YSort/House Collision"]
+position = Vector2( 123, -632 )
+shape = SubResource( 7 )
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="YSort/House Collision"]
+position = Vector2( -33, -644 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="YSort/House Collision"]
+position = Vector2( -7, -644 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="YSort/House Collision"]
+position = Vector2( -216, -776 )
+shape = SubResource( 9 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="YSort/House Collision"]
+position = Vector2( 177, -776 )
+shape = SubResource( 9 )
+
 [node name="Enemy Collision" type="StaticBody2D" parent="YSort"]
 collision_layer = 2147483649
 collision_mask = 23
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="YSort/Enemy Collision"]
-position = Vector2( 424, 112 )
+position = Vector2( 424.794, 61.2032 )
 z_index = 6
-shape = SubResource( 2 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="YSort/Enemy Collision"]
+position = Vector2( 424, 183.433 )
+z_index = 6
+shape = SubResource( 10 )
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="YSort/Enemy Collision"]
 position = Vector2( 424, -232 )
 z_index = 6
-shape = SubResource( 2 )
+shape = SubResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Enemy Collision"]
 position = Vector2( -16, 232 )
 z_index = 6
-shape = SubResource( 3 )
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="YSort/Enemy Collision"]
-position = Vector2( 0, -280 )
-z_index = 6
-shape = SubResource( 3 )
+shape = SubResource( 11 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="YSort/Enemy Collision"]
 position = Vector2( -392, 24 )
 rotation = 1.5708
 z_index = 6
-shape = SubResource( 3 )
+shape = SubResource( 11 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="YSort/Enemy Collision"]
 position = Vector2( 544, 16 )
 rotation = 1.5708
 z_index = 6
-shape = SubResource( 3 )
+shape = SubResource( 11 )
 
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="YSort/Enemy Collision"]
 position = Vector2( 544, 176 )
 rotation = 1.5708
 z_index = 6
-shape = SubResource( 3 )
+shape = SubResource( 11 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="YSort/Enemy Collision"]
+position = Vector2( 188, -362 )
+z_index = 6
+shape = SubResource( 12 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( -256, -128 )
@@ -535,18 +610,6 @@ position = Vector2( -320, -224 )
 
 [node name="SnowishTree37" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
 position = Vector2( -296, -240 )
-
-[node name="SnowishTree38" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -272, -224 )
-
-[node name="SnowishTree39" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -248, -240 )
-
-[node name="SnowishTree40" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -224, -224 )
-
-[node name="SnowishTree41" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -200, -240 )
 
 [node name="SnowishTree42" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
 position = Vector2( -176, -224 )
@@ -1463,18 +1526,6 @@ position = Vector2( -320, -264 )
 [node name="SnowishTree371" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
 position = Vector2( -296, -280 )
 
-[node name="SnowishTree372" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -272, -264 )
-
-[node name="SnowishTree373" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -248, -280 )
-
-[node name="SnowishTree374" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -224, -264 )
-
-[node name="SnowishTree375" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -200, -280 )
-
 [node name="SnowishTree376" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
 position = Vector2( -176, -264 )
 
@@ -1597,18 +1648,6 @@ position = Vector2( -320, -304 )
 
 [node name="SnowishTree416" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
 position = Vector2( -296, -320 )
-
-[node name="SnowishTree417" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -272, -304 )
-
-[node name="SnowishTree418" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -248, -320 )
-
-[node name="SnowishTree419" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -224, -304 )
-
-[node name="SnowishTree420" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -200, -320 )
 
 [node name="SnowishTree421" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
 position = Vector2( -176, -304 )
@@ -2024,18 +2063,6 @@ position = Vector2( -320, -344 )
 [node name="SnowishTree621" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
 position = Vector2( -296, -360 )
 
-[node name="SnowishTree622" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -272, -344 )
-
-[node name="SnowishTree623" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -248, -360 )
-
-[node name="SnowishTree642" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -224, -344 )
-
-[node name="SnowishTree643" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -200, -360 )
-
 [node name="SnowishTree644" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
 position = Vector2( -176, -344 )
 
@@ -2321,18 +2348,6 @@ position = Vector2( -320, -384 )
 [node name="SnowishTree738" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
 position = Vector2( -296, -400 )
 
-[node name="SnowishTree739" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -272, -384 )
-
-[node name="SnowishTree740" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -248, -400 )
-
-[node name="SnowishTree741" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -224, -384 )
-
-[node name="SnowishTree742" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -200, -400 )
-
 [node name="SnowishTree743" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
 position = Vector2( -176, -384 )
 
@@ -2455,18 +2470,6 @@ position = Vector2( -320, -424 )
 
 [node name="SnowishTree783" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
 position = Vector2( -296, -440 )
-
-[node name="SnowishTree784" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -272, -424 )
-
-[node name="SnowishTree785" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -248, -440 )
-
-[node name="SnowishTree786" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -224, -424 )
-
-[node name="SnowishTree787" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
-position = Vector2( -200, -440 )
 
 [node name="SnowishTree788" parent="YSort/Trees (Will Freeze Temp if Unlocked)\\" instance=ExtResource( 10 )]
 position = Vector2( -176, -424 )
@@ -4055,8 +4058,9 @@ position = Vector2( -536, 480 )
 [node name="Items (YSort)" type="YSort" parent="YSort"]
 
 [node name="ItemDrop" parent="YSort/Items (YSort)" instance=ExtResource( 9 )]
-position = Vector2( -168, -96 )
+position = Vector2( -47.2955, -175.677 )
 ITEM_NAME = "Slime Potion"
+ABSORBABLE = true
 FLOATING_TAB = true
 
 [node name="Shadow" parent="YSort/Items (YSort)/ItemDrop" index="0"]
@@ -4067,9 +4071,6 @@ texture = ExtResource( 13 )
 
 [node name="Sprite" parent="YSort/Items (YSort)/ItemDrop" index="1"]
 texture = ExtResource( 3 )
-
-[node name="Tab" parent="YSort/Items (YSort)/ItemDrop" index="6"]
-frame = 0
 
 [node name="ItemDrop2" parent="YSort/Items (YSort)" instance=ExtResource( 9 )]
 position = Vector2( 264, 64 )
@@ -4084,9 +4085,6 @@ texture = ExtResource( 13 )
 
 [node name="Sprite" parent="YSort/Items (YSort)/ItemDrop2" index="1"]
 texture = ExtResource( 3 )
-
-[node name="Tab" parent="YSort/Items (YSort)/ItemDrop2" index="6"]
-frame = 0
 
 [node name="YSort" type="YSort" parent="YSort"]
 
@@ -4142,6 +4140,9 @@ collision_layer = 2147483664
 position = Vector2( -96, -48 )
 collision_layer = 2147483664
 
+[node name="AnimatedSprite" parent="YSort/YSort/Slimeo4" index="1"]
+frame = 2
+
 [node name="Slimeo5" parent="YSort/YSort" groups=[
 "Enemies",
 ] instance=ExtResource( 8 )]
@@ -4173,6 +4174,19 @@ position = Vector2( 96, -64 )
 collision_layer = 2147483664
 collision_mask = 2147483667
 
+[node name="TextureRect" type="TextureRect" parent="YSort/YSort"]
+margin_left = -230.0
+margin_top = -1054.0
+margin_right = 190.0
+margin_bottom = -609.0
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
 [editable path="YSort/Items (YSort)/ItemDrop"]
 
 [editable path="YSort/Items (YSort)/ItemDrop2"]
+
+[editable path="YSort/YSort/Slimeo4"]

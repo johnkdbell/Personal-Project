@@ -39,22 +39,22 @@ tracks/1/keys = {
 [sub_resource type="CircleShape2D" id=3]
 radius = 23.5295
 
-[sub_resource type="ShaderMaterial" id=7]
+[sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 4 )
-
-[sub_resource type="AtlasTexture" id=4]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 3 )
 region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=6]
+[sub_resource type="SpriteFrames" id=7]
 animations = [ {
-"frames": [ SubResource( 4 ), SubResource( 5 ) ],
+"frames": [ SubResource( 5 ), SubResource( 6 ) ],
 "loop": true,
 "name": "tab_arrow",
 "speed": 1.0
@@ -82,17 +82,10 @@ anims/Float = SubResource( 2 )
 [node name="CollisionShape2D" parent="PlayerDetection" index="0"]
 shape = SubResource( 3 )
 
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Tab" type="AnimatedSprite" parent="."]
-material = SubResource( 7 )
+material = SubResource( 4 )
 position = Vector2( 0, -0.52965 )
-frames = SubResource( 6 )
+frames = SubResource( 7 )
 animation = "tab_arrow"
 playing = true
 offset = Vector2( 0, -40 )

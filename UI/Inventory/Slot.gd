@@ -51,3 +51,7 @@ func initialize_item(item_name, item_quantity):
 		item.set_item(item_name, item_quantity)
 	refresh_style()
 
+func deleteFromSlot():
+	remove_child(item);
+	item = null;
+	refresh_style();

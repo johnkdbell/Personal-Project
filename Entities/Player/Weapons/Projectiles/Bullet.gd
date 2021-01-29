@@ -13,7 +13,7 @@ func _launch_arrow():
 	apply_impulse(Vector2(), Vector2(CAST_VELOCITY).rotated(rotation));
 	angle = Vector2(CAST_VELOCITY).rotated(rotation);
 
-func _on_Hitbox_body_entered(body):
+func _on_BulletHitbox_body_entered(body):
 	if body.is_in_group("Enemies"):
 	#		var my_texture = load("res://Projectiles/Bullet.png");
 	#		var sprite = Sprite.new();

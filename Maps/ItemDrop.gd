@@ -16,35 +16,34 @@ var being_picked_up = false
 onready var playerDetection = $PlayerDetection;
 onready var tabFloatingButton = $Tab;
 
-	
 func _physics_process(delta):
+	# Display floating tab image above item drop
 	if FLOATING_TAB == true:
 		tabFloatingButton.visible = true;
 	else:
 		tabFloatingButton.visible = false;		
 	
+	# If the player is within the player detection zone and absorbable is true
 	if playerDetection.can_see_player() && ABSORBABLE == true:
 		var player = playerDetection.player;
 		var direction = global_position.direction_to(player.global_position);
 		var distance = global_position.distance_to(player.global_position);
+		
 		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta);
+		tabFloatingButton.visible = false;
 		
 		if distance < 10:
 			PlayerInventory.add_item(ITEM_NAME, ITEM_QUANTITY)
 			queue_free()
 		
-	if being_picked_up == false && Input.is_action_just_released("pickup"):
-		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta);
-			
+	# Else if the item is in the process of being able to be picked up and the pickup button is being held
 	elif being_picked_up == true && Input.is_action_pressed("pickup"):
 		var direction = global_position.direction_to(player.global_position);
 		var distance = global_position.distance_to(player.global_position);
+		
+		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta);
 		tabFloatingButton.visible = false;
 		ABSORBABLE = true;
-		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta);
-		
-		if being_picked_up == false && Input.is_action_just_released("pickup"):
-			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta);
 		
 		if distance < 10:
 			PlayerInventory.add_item(ITEM_NAME, ITEM_QUANTITY)

@@ -20,8 +20,6 @@ onready var stats = $Stats;
 
 func _ready():
 	state = pick_random_state([IDLE, WANDER]);
-	print("POOP")
-	
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta);
@@ -69,7 +67,7 @@ func seek_player():
 		
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage;
-	knockback = get_global_mouse_position() * 0.85;
+	knockback = area.knockback_vector * 500;
 	
 func _on_Stats_no_health():
 	queue_free();

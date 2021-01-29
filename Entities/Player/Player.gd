@@ -45,19 +45,11 @@ func _physics_process(delta):
 			apply_movement(delta);
 	
 func move_state(delta):
-	var absorption_press = 0;
+	absorption_press();
 	var input_vector = Vector2.ZERO;	
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left");
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up");
 	input_vector = input_vector.normalized();
-	
-	if Input.is_action_just_pressed("pickup"):
-		absorption_press += 1;
-		fuck(absorption_press);
-			
-	if Input.is_action_just_released("pickup"):
-		absorption_press -= 1;
-		fuck(absorption_press);
 	
 	if Input.is_action_pressed("right_mouse_button"):
 		if Input.is_action_just_pressed("shoot"):
@@ -104,15 +96,24 @@ func spawn_arrow():
 		bullet.rotation = get_angle_to(get_global_mouse_position());
 		bullet.position = position;
 		get_tree().current_scene.add_child(bullet);
+		
+func absorption_press():
+	var absorption_press = 0;
+	
+	if Input.is_action_just_pressed("pickup"):
+		absorption_press += 1;
+			
+	if Input.is_action_just_released("pickup"):
+		absorption_press -= 1;
+		
+	if absorption_press == 1:
+		if pickupZone.items_in_range.size() > 0:
+			var pickup_item = pickupZone.items_in_range.values()[0]
+			pickup_item.pick_up_item(self)
+			pickupZone.items_in_range.erase(pickup_item)
+	elif absorption_press == -1:		
+		if pickupZone.items_in_range.size() > 0:
+			var pickup_item = pickupZone.items_in_range.values()[0]
+			pickup_item.pick_up_item(self)
+			pickupZone.items_in_range.erase(pickup_item)
 
-func fuck(fucker):
-	if fucker == 1:
-		if pickupZone.items_in_range.size() > 0:
-			var pickup_item = pickupZone.items_in_range.values()[0]
-			pickup_item.pick_up_item(self)
-			pickupZone.items_in_range.erase(pickup_item)
-	elif fucker == -1:		
-		if pickupZone.items_in_range.size() > 0:
-			var pickup_item = pickupZone.items_in_range.values()[0]
-			pickup_item.pick_up_item(self)
-			pickupZone.items_in_range.erase(pickup_item)

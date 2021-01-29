@@ -5,4 +5,9 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_just_pressed("exit"):
+		print("Exiting...")
 		get_tree().quit()
+	
+	elif Input.is_action_just_pressed("restart"):
+		print("Restarting...")
+		get_tree().reload_current_scene();

@@ -30,6 +30,19 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 						left_click_same_item(slot)
 			elif slot.item:
 				left_click_not_holding(slot)
+		# DELETES ITEMS SECTION BELOW
+		elif event.button_index == BUTTON_RIGHT && event.pressed: 
+			if holding_item != null:
+				if !slot.item:
+					left_click_empty_slot(slot)
+				else:
+					if holding_item.item_name != slot.item.item_name:
+						left_click_different_item(event, slot)
+					else:
+						left_click_same_item(slot)
+			elif slot.item:
+				# DELETES ITEM
+				delete_item(slot)
 				
 func _input(event):
 	if holding_item:
@@ -67,3 +80,7 @@ func left_click_not_holding(slot: SlotClass):
 	holding_item = slot.item
 	slot.pickFromSlot()
 	holding_item.global_position = get_global_mouse_position()
+	
+func delete_item(slot: SlotClass):
+	PlayerInventory.remove_item(slot)
+	slot.deleteFromSlot()
