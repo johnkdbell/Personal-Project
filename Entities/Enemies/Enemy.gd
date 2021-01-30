@@ -3,6 +3,7 @@ extends KinematicBody2D
 export var ACCELERATION = 100;
 export var MAX_SPEED = 100;
 export var FRICTION = 1000;
+export var KNOCKBACK_AMOUNT = 20;
 
 enum {
 	IDLE,
@@ -11,6 +12,7 @@ enum {
 }
 
 var velocity = Vector2.ZERO
+var knockback = Vector2.ZERO;
 var state = CHASE;
 var player_follow = 0
 var starting_position;
@@ -28,6 +30,9 @@ func _ready():
 	state = pick_random_state([IDLE, WANDER]);
 
 func _physics_process(delta):
+	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta);
+	knockback = move_and_slide(knockback);
+	
 	match state:
 		IDLE:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta);
@@ -112,8 +117,7 @@ func follow_direction():
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage;
-	print(area.damage)
-	print("ENTERED HURTBOX")
+	knockback = area.knockback_vector * (KNOCKBACK_AMOUNT * 10);
 	
 func _on_Stats_no_health():
 	queue_free();

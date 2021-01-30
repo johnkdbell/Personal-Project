@@ -2,7 +2,7 @@ extends RigidBody2D
 
 const CAST_VELOCITY = Vector2(800,0);
 var angle = null;
-var knockback_vector = Vector2.ZERO;
+var knockback = Vector2.ZERO;
 
 onready var timer = $Timer;
 
@@ -12,15 +12,16 @@ func _ready():
 func _launch_arrow():
 	apply_impulse(Vector2(), Vector2(CAST_VELOCITY).rotated(rotation));
 	angle = Vector2(CAST_VELOCITY).rotated(rotation);
+	$Hitbox.knockback_vector = angle / 1000;
 
-func _on_BulletHitbox_body_entered(body):
+func _on_Hitbox_body_entered(body):
 	if body.is_in_group("Enemies"):
-	#		var my_texture = load("res://Projectiles/Bullet.png");
-	#		var sprite = Sprite.new();
-	#		sprite.look_at(angle);
-	#		sprite.set_offset(Vector2(-9,0));
-	#		sprite.set_texture(my_texture);
-	#		body.add_child(sprite);
+#		var my_texture = load("res://Projectiles/Bullet.png");
+#		var sprite = Sprite.new();
+#		sprite.look_at(angle);
+#		sprite.set_offset(Vector2(-9,0));
+#		sprite.set_texture(my_texture);
+#		body.add_child(sprite);
 		queue_free();
 		
 func update_target_position():

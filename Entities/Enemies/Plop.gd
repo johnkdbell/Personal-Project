@@ -3,6 +3,7 @@ extends KinematicBody2D
 export var ACCELERATION = 300;
 export var MAX_SPEED = 50;
 export var FRICTION = 200;
+export var KNOCKBACK_AMOUNT = 20;
 
 enum {
 	IDLE,
@@ -67,7 +68,7 @@ func seek_player():
 		
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage;
-	knockback = area.knockback_vector * 500;
-	
+	knockback = area.knockback_vector * (KNOCKBACK_AMOUNT * 10);
+		
 func _on_Stats_no_health():
 	queue_free();
