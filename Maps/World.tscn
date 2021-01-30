@@ -4073,6 +4073,9 @@ texture = ExtResource( 13 )
 [node name="Sprite" parent="YSort/Items (YSort)/ItemDrop" index="1"]
 texture = ExtResource( 3 )
 
+[node name="Tab" parent="YSort/Items (YSort)/ItemDrop" index="5"]
+frame = 1
+
 [node name="ItemDrop2" parent="YSort/Items (YSort)" instance=ExtResource( 9 )]
 position = Vector2( 264, 64 )
 ITEM_NAME = "Slime Potion"
@@ -4086,6 +4089,9 @@ texture = ExtResource( 13 )
 
 [node name="Sprite" parent="YSort/Items (YSort)/ItemDrop2" index="1"]
 texture = ExtResource( 3 )
+
+[node name="Tab" parent="YSort/Items (YSort)/ItemDrop2" index="5"]
+frame = 1
 
 [node name="YSort" type="YSort" parent="YSort"]
 
@@ -4142,7 +4148,7 @@ position = Vector2( -96, -48 )
 collision_layer = 2147483664
 
 [node name="AnimatedSprite" parent="YSort/YSort/Slimeo4" index="1"]
-frame = 4
+frame = 3
 
 [node name="Slimeo5" parent="YSort/YSort" groups=[
 "Enemies",

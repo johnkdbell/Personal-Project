@@ -726,6 +726,10 @@ disabled = true
 [node name="ProjectileDelayTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="ScentTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
 [node name="PickupZone" type="Area2D" parent="."]
 visible = false
 collision_layer = 0

@@ -43,10 +43,22 @@ func _physics_process(delta):
 			
 		CHASE:
 			var player = playerDetection.player;
+			var look = self.get_node("RayCast2D")
+			
 			if player != null:
-				move_towards_point(player.global_position, delta)
-			else:
+				for scent in player.scent_trail:
+					look.cast_to = (scent.global_position - self.global_position)
+					look.force_raycast_update()
+						
+					if player != null:
+						move_towards_point(scent.global_position, delta);
+					if player == null:
+						state = IDLE;
+						break
+						
+			else:				
 				state = IDLE;
+			
 			
 	velocity = move_and_slide(velocity);
 	

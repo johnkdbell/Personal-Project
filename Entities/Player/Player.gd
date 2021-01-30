@@ -12,11 +12,14 @@ enum {
 	SHOOT
 }
 
+const scent_scene = preload("res://Entities/Player/Scent.tscn");
+
 var state = MOVE;
 var velocity = Vector2.ZERO
 var player_bullet := preload("res://Entities/Player/Weapons/Projectiles/Bullet.tscn");
 var roll_vector = Vector2.DOWN;
 var is_move = true;
+var scent_trail = [];
 
 onready var	animationPlayer = $AnimationPlayer;
 onready var animationTree = $AnimationTree;
@@ -29,6 +32,7 @@ onready var pickupZoneCollision = $PickupZone/CollisionShape2D;
 func _ready():
 	animationTree.active = true;
 	meleeHitbox.knockback_vector = roll_vector;
+	$ScentTimer.connect("timeout", self, "add_scent");
 	randomize();
 
 func _physics_process(delta):
@@ -116,4 +120,12 @@ func absorption_press():
 			var pickup_item = pickupZone.items_in_range.values()[0]
 			pickup_item.pick_up_item(self)
 			pickupZone.items_in_range.erase(pickup_item)
+			
+func add_scent():
+	var scent = scent_scene.instance();
+	scent.player = self;
+	scent.position = self.position;
+
+	get_tree().current_scene.add_child(scent)
+	scent_trail.push_front(scent)
 
