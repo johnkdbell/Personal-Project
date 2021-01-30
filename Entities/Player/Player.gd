@@ -35,14 +35,14 @@ func _physics_process(delta):
 	match state:
 		MOVE:
 			move_state(delta);
-			apply_movement(delta)
+			apply_movement()
 		ROLL:
 			pass;
 		ATTACK:
-			attack_state(delta);
+			attack_state();
 		SHOOT:
 			move_state(delta);
-			apply_movement(delta);
+			apply_movement();
 	
 func move_state(delta):
 	absorption_press();
@@ -73,13 +73,13 @@ func move_state(delta):
 		is_move = false;
 		velocity = lerp(velocity, Vector2.ZERO, FRICTION);
 	
-func apply_movement(delta):
+func apply_movement():
 	velocity = move_and_slide(velocity);
 	
-func attack_state(delta):
+func attack_state():
 	animationState.travel("Attack");
 	
-func shoot_state(delta):
+func shoot_state():
 	state = SHOOT;
 	shoot_animation_finished();
 	

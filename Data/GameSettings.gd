@@ -3,7 +3,7 @@ extends Node
 func _ready():
 	set_process(true)
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("exit"):
 		print("Exiting...")
 		get_tree().quit()

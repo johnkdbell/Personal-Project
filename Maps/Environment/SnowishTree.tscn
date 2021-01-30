@@ -3,8 +3,6 @@
 [ext_resource path="res://Raw Resources/Sprites/World/SnowishTreeTop.png" type="Texture" id=1]
 [ext_resource path="res://Raw Resources/Sprites/World/TreeWood.png" type="Texture" id=2]
 
-
-
 [sub_resource type="RectangleShape2D" id=1]
 
 [node name="SnowTree" type="Node2D"]
@@ -23,6 +21,7 @@ scale = Vector2( 0.45, 0.45 )
 shape = SubResource( 1 )
 
 [node name="SnowTreeTop" type="Sprite" parent="KinematicBody2D"]
+visible = false
 position = Vector2( 0, -48 )
 z_index = 1
 texture = ExtResource( 1 )
