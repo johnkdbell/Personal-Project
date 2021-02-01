@@ -654,6 +654,7 @@ radius = 112.134
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
+collision_mask = 0
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -727,7 +728,7 @@ disabled = true
 one_shot = true
 
 [node name="ScentTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.05
 autostart = true
 
 [node name="PickupZone" type="Area2D" parent="."]

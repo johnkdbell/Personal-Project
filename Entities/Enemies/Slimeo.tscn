@@ -40,15 +40,17 @@ animations = [ {
 radius = 15.0
 
 [sub_resource type="CircleShape2D" id=8]
-radius = 72.0
+radius = 192.35
 
 [sub_resource type="CircleShape2D" id=9]
 radius = 7.07107
 
 [node name="Slimeo" type="KinematicBody2D"]
-collision_layer = 17
-collision_mask = 19
+collision_layer = 16
+collision_mask = 2147483667
 script = ExtResource( 2 )
+ACCELERATION = 50
+KNOCKBACK_AMOUNT = 18
 
 [node name="Stats" parent="." instance=ExtResource( 7 )]
 max_health = 30
@@ -56,16 +58,16 @@ max_health = 30
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
 animation = "walk"
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 4.76837e-07, 2 )
 scale = Vector2( 0.4, 0.4 )
 shape = SubResource( 7 )
 
 [node name="PlayerDetection" parent="." instance=ExtResource( 3 )]
-visible = false
+collision_mask = 2
 
 [node name="CollisionShape2D" parent="PlayerDetection" index="0"]
 modulate = Color( 1, 1, 1, 0.0941176 )
@@ -87,6 +89,8 @@ collision_layer = 9
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, 1 )
 shape = SubResource( 9 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 

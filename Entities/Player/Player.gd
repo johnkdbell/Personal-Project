@@ -125,7 +125,7 @@ func add_scent():
 	var scent = scent_scene.instance();
 	scent.player = self;
 	scent.position = self.position;
-
-	get_tree().current_scene.add_child(scent)
-	scent_trail.push_front(scent)
+	if is_move == true:
+		get_tree().current_scene.add_child(scent)
+		scent_trail.push_front(scent)
 

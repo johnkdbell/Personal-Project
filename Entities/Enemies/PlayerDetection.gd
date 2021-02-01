@@ -10,3 +10,5 @@ func _on_PlayerDetection_body_entered(body):
 
 func _on_PlayerDetection_body_exited(body):
 	player = null;
+	
+
