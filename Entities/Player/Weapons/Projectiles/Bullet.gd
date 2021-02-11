@@ -16,13 +16,13 @@ func _launch_arrow():
 
 func _on_Hitbox_body_entered(body):
 	if body.is_in_group("Enemies"):
-#		var my_texture = load("res://Projectiles/Bullet.png");
-#		var sprite = Sprite.new();
-#		sprite.look_at(angle);
-#		sprite.set_offset(Vector2(-9,0));
-#		sprite.set_texture(my_texture);
-#		body.add_child(sprite);
 		queue_free();
+		var my_texture = load("res://Entities/Player/Weapons/Projectiles/Bullet.png");
+		var sprite = Sprite.new();
+		sprite.look_at(angle);
+		sprite.set_offset(Vector2(-9,0));
+		sprite.set_texture(my_texture);
+		body.add_child(sprite);
 		
 func update_target_position():
 	queue_free();

@@ -26,6 +26,7 @@ config/icon="res://icon.png"
 JsonData="*res://Data/JSONData.gd"
 PlayerInventory="*res://Data/PlayerInventory.gd"
 GameSettings="*res://Data/GameSettings.gd"
+PlayerStats="*res://Entities/Player/PlayerStats.tscn"
 
 [display]
 
@@ -141,9 +142,11 @@ restart={
 2d_physics/layer_3="ItemDrop"
 2d_physics/layer_4="EnemyHurtbox"
 2d_physics/layer_5="Enemy"
-2d_physics/layer_6="PlayerScent"
+2d_physics/layer_6="PlayerHurtbox"
+2d_physics/layer_7="SoftCollision"
 
 [rendering]
 
 quality/intended_usage/framebuffer_allocation=0
+quality/2d/use_pixel_snap=true
 environment/default_environment="res://default_env.tres"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Raw Resources/Sprites/World/Background/GreenGrass.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://UI/UserInterface.gd" type="Script" id=12]
 [ext_resource path="res://Raw Resources/Sprites/Shadows/SmallShadow.png" type="Texture" id=13]
 [ext_resource path="res://Raw Resources/Sprites/World/Duplex.png" type="Texture" id=14]
+[ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=15]
 
 [sub_resource type="TileSet" id=1]
 0/name = "SnowTileset.png 0"
@@ -67,7 +68,7 @@ extents = Vector2( 10, 122 )
 extents = Vector2( 80, 63.2333 )
 
 [sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 519.957, 39.9611 )
+extents = Vector2( 432.142, 39.9611 )
 
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 384, 109 )
@@ -76,6 +77,12 @@ extents = Vector2( 384, 109 )
 
 [node name="UserInterface" type="CanvasLayer" parent="."]
 script = ExtResource( 12 )
+
+[node name="HealthUI" parent="UserInterface" instance=ExtResource( 15 )]
+margin_left = 8.0
+margin_top = 3.0
+margin_right = 88.0
+margin_bottom = 18.0
 
 [node name="Inventory" parent="UserInterface" instance=ExtResource( 11 )]
 visible = false
@@ -189,7 +196,7 @@ z_index = 6
 shape = SubResource( 11 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="YSort/Enemy Collision"]
-position = Vector2( -392, 24 )
+position = Vector2( -393.059, 24 )
 rotation = 1.5708
 z_index = 6
 shape = SubResource( 11 )
@@ -4062,7 +4069,6 @@ position = Vector2( -536, 480 )
 position = Vector2( -47.2955, -175.677 )
 ITEM_NAME = "Slime Potion"
 ABSORBABLE = true
-FLOATING_TAB = true
 
 [node name="Shadow" parent="YSort/Items (YSort)/ItemDrop" index="0"]
 modulate = Color( 1, 1, 1, 0.588235 )
@@ -4140,8 +4146,11 @@ collision_layer = 2147483664
 [node name="Slimeo4" parent="YSort/YSort" groups=[
 "Enemies",
 ] instance=ExtResource( 8 )]
-position = Vector2( -96, -48 )
+position = Vector2( 20, -38 )
 collision_layer = 2147483664
+
+[node name="AnimatedSprite" parent="YSort/YSort/Slimeo4" index="1"]
+frame = 1
 
 [node name="Slimeo5" parent="YSort/YSort" groups=[
 "Enemies",

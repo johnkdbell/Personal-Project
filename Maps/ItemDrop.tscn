@@ -62,6 +62,7 @@ animations = [ {
 
 [node name="ItemDrop" type="KinematicBody2D"]
 collision_layer = 4
+collision_mask = 5
 script = ExtResource( 2 )
 
 [node name="Shadow" type="Sprite" parent="."]
@@ -78,6 +79,7 @@ autoplay = "Float"
 anims/Float = SubResource( 2 )
 
 [node name="PlayerDetection" parent="." instance=ExtResource( 1 )]
+collision_mask = 2
 
 [node name="CollisionShape2D" parent="PlayerDetection" index="0"]
 shape = SubResource( 3 )

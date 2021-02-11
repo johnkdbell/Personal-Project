@@ -9,5 +9,6 @@ func _process(_delta):
 		get_tree().quit()
 	
 	elif Input.is_action_just_pressed("restart"):
-		print("Restarting...")
+		print("Restarting...");
+		PlayerStats.restart_health();
 		get_tree().reload_current_scene();
