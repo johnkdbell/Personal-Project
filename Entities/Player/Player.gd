@@ -21,6 +21,7 @@ var roll_vector = Vector2.DOWN;
 var is_move = true;
 var scent_trail = [];
 var stats = PlayerStats;
+var aiming = false;
 
 onready var	animationPlayer = $AnimationPlayer;
 onready var animationTree = $AnimationTree;
@@ -30,6 +31,7 @@ onready var meleeHitbox = $HitboxPivot/MeleeHitbox;
 onready var pickupZone = $PickupZone;
 onready var pickupZoneCollision = $PickupZone/CollisionShape2D;
 onready var hurtbox = $Hurtbox;
+onready var screenShake = $RemoteTransform2D/Camera2D/ScreenShake;
 
 func _ready():
 	meleeHitbox.knockback_vector = roll_vector;
@@ -65,7 +67,7 @@ func move_state(delta):
 	elif Input.is_action_just_pressed("left_mouse_button"):
 		velocity = Vector2.ZERO;
 		state = ATTACK;
-	
+		
 	if input_vector != Vector2.ZERO:
 		is_move = true;
 		roll_vector = input_vector;
@@ -129,6 +131,8 @@ func _on_Hurtbox_area_entered(area):
 	if hurtbox.invincible == true:
 		stats.health -= 0;
 	else:
+		screenShake.start(0.2, 10, 10);
 		hurtbox.start_invincibility(3);
 		hurtbox.create_hit_effect();
+		animationPlayer.play("FlashDamage")
 		stats.health -= area.damage;

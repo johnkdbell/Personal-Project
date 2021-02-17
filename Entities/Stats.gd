@@ -21,7 +21,6 @@ func set_health(value):
 func _ready():
 	self.health = max_health;
 	
-	
 func restart_health():
 	if max_health > health:
 			health = max_health

@@ -1,0 +1,99 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Entities/Enemies/PlayerDetection.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Maps/HeartDrop.gd" type="Script" id=2]
+[ext_resource path="res://UI/World/Tab.png" type="Texture" id=3]
+[ext_resource path="res://Shaders/JitterFreePixelArt.shader" type="Shader" id=4]
+[ext_resource path="res://Raw Resources/Sprites/Shit Sprites/heart_3.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4.41238, 4.98715 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Float"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Tab:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -0.75 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 23.5295
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 4 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "tab_arrow",
+"speed": 1.0
+} ]
+
+[node name="HeartDrop" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource( 2 )
+
+[node name="Shadow" type="Sprite" parent="."]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 5.96046e-08 )
+scale = Vector2( 0.875, 0.875 )
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Float"
+anims/Float = SubResource( 2 )
+
+[node name="PlayerDetection" parent="." instance=ExtResource( 1 )]
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="PlayerDetection" index="0"]
+shape = SubResource( 3 )
+
+[node name="Tab" type="AnimatedSprite" parent="."]
+material = SubResource( 4 )
+position = Vector2( 0, -0.52965 )
+frames = SubResource( 7 )
+animation = "tab_arrow"
+frame = 1
+playing = true
+offset = Vector2( 0, -40 )
+
+[editable path="PlayerDetection"]
