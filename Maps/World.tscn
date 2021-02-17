@@ -675,9 +675,6 @@ texture = ExtResource( 13 )
 [node name="Sprite" parent="YSort/Items (YSort)/ItemDrop" index="1"]
 texture = ExtResource( 3 )
 
-[node name="Tab" parent="YSort/Items (YSort)/ItemDrop" index="5"]
-frame = 1
-
 [node name="ItemDrop2" parent="YSort/Items (YSort)" instance=ExtResource( 9 )]
 position = Vector2( 264, 64 )
 ITEM_NAME = "Slime Potion"
@@ -691,9 +688,6 @@ texture = ExtResource( 13 )
 
 [node name="Sprite" parent="YSort/Items (YSort)/ItemDrop2" index="1"]
 texture = ExtResource( 3 )
-
-[node name="Tab" parent="YSort/Items (YSort)/ItemDrop2" index="5"]
-frame = 1
 
 [node name="HeartDrop" parent="YSort/Items (YSort)" instance=ExtResource( 17 )]
 position = Vector2( 582.711, 17 )
