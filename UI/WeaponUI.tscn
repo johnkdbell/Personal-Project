@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://UI/WeaponUI.gd" type="Script" id=1]
+[ext_resource path="res://Raw Resources/Sprites/Shit Sprites/white.png" type="Texture" id=2]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://Fonts/MinimalPixel v2.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 14
+outline_size = 1
+outline_color = Color( 0.12549, 0.12549, 0.12549, 0.784314 )
+use_mipmaps = true
+use_filter = true
+font_data = SubResource( 1 )
+
+[node name="WeaponUI" type="Control"]
+margin_right = 24.0
+margin_bottom = 16.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color( 0, 0, 0, 0.27451 )
+margin_top = -3.0
+margin_right = 88.0
+margin_bottom = 20.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ammo" type="Label" parent="."]
+margin_right = 80.0
+margin_bottom = 16.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 0.74902, 0, 1 )
+text = "_ 10/10"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -8,6 +8,7 @@ onready var heartUIEmpty = $HeartUIEmpty;
 
 func set_hearts(value):
 	hearts = clamp(value, 0, max_hearts);
+	$Health.text = "+ " + String(hearts);
 	if heartUIFull != null:
 		heartUIFull.rect_size.x = hearts * 18;
 

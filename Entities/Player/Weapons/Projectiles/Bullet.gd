@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+export var damage = 1;
+
 const HIT_EFFECT = preload("res://Effects/HitEffect.tscn");
 
 const CAST_VELOCITY = Vector2(2000,0);
@@ -10,6 +12,7 @@ onready var timer = $Timer;
 
 func _ready():
 	_launch_arrow();
+	$Hitbox.damage = damage;
 	
 func _launch_arrow():
 	apply_impulse(Vector2(), Vector2(CAST_VELOCITY).rotated(rotation));

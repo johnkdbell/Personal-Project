@@ -3,7 +3,6 @@ extends KinematicBody2D
 export var MAX_SPEED = 150;
 export var ACCELERATION = 3;
 export var FRICTION = 0.3;
-export var projectileDelay: float = 0.1;
 
 enum {
 	MOVE,
@@ -16,22 +15,22 @@ const scent_scene = preload("res://Entities/Player/Scent.tscn");
 
 var state = MOVE;
 var velocity = Vector2.ZERO
-var player_bullet := preload("res://Entities/Player/Weapons/Projectiles/Bullet.tscn");
 var roll_vector = Vector2.DOWN;
 var is_move = true;
 var scent_trail = [];
 var stats = PlayerStats;
-var aiming = false;
 
 onready var	animationPlayer = $AnimationPlayer;
 onready var animationTree = $AnimationTree;
 onready var animationState = animationTree.get("parameters/playback");
-onready var projectileDelayTimer := $ProjectileDelayTimer;
 onready var meleeHitbox = $HitboxPivot/MeleeHitbox;
 onready var pickupZone = $PickupZone;
 onready var pickupZoneCollision = $PickupZone/CollisionShape2D;
 onready var hurtbox = $Hurtbox;
 onready var screenShake = $RemoteTransform2D/Camera2D/ScreenShake;
+#onready var weapon = $WeaponManager/Pistol9mm;
+onready var weapon_manager = $WeaponManager;
+
 
 func _ready():
 	meleeHitbox.knockback_vector = roll_vector;
@@ -42,6 +41,7 @@ func _ready():
 
 func _physics_process(delta):
 	absorption_press();
+	weapon_manager.input();
 	match state:
 		MOVE:
 			move_state(delta);
@@ -63,9 +63,9 @@ func move_state(delta):
 	if Input.is_action_pressed("right_mouse_button"):
 		$AimingLaser.is_casting = true;
 		$AimingLaser.cast_to = get_transform().affine_inverse() * get_global_mouse_position() * 10;		
-		if Input.is_action_just_pressed("shoot"):
+		if Input.is_action_just_pressed("shoot") || Input.is_action_pressed("shoot"):
 			state = SHOOT;
-			spawn_arrow();
+#			weapon.shoot();
 	elif Input.is_action_just_released("right_mouse_button"):
 		$AimingLaser.is_casting = false;
 	elif Input.is_action_just_pressed("left_mouse_button"):
@@ -101,14 +101,6 @@ func attack_animation_finished():
 	
 func shoot_animation_finished():
 	state = MOVE;
-	
-func spawn_arrow():
-	if projectileDelayTimer.is_stopped():
-		projectileDelayTimer.start(projectileDelay);
-		var bullet := player_bullet.instance();
-		bullet.rotation = get_angle_to(get_global_mouse_position());
-		bullet.position = position;
-		get_tree().current_scene.add_child(bullet);
 		
 func absorption_press():
 	var absorption_press = 0;

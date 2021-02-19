@@ -25,14 +25,17 @@ func pick_up_item(body):
 	being_picked_up = true
 	
 func item_absorption(delta):
-	if (playerDetection.can_see_player() && ABSORBABLE == true):
-		player = playerDetection.player;
-		move_towards_direction(delta)
+	if PlayerStats.health != PlayerStats.max_health:
+		if (playerDetection.can_see_player() && ABSORBABLE == true):
+			player = playerDetection.player;
+			move_towards_direction(delta)
+			
+		elif (being_picked_up == true && Input.is_action_pressed("pickup")):
+			move_towards_direction(delta)
+			ABSORBABLE = true;
+	else:
+		pass;
 		
-	elif (being_picked_up == true && Input.is_action_pressed("pickup")):
-		move_towards_direction(delta)
-		ABSORBABLE = true;
-	
 func move_towards_direction(delta):
 	var direction = global_position.direction_to(player.global_position);
 	var distance = global_position.distance_to(player.global_position);
@@ -41,10 +44,12 @@ func move_towards_direction(delta):
 	tabFloatingButton.visible = false;
 	
 	if distance < 10:
-		heart();
+		health();
 		queue_free();
 		
 		
-func heart():
-	PlayerStats.max_health += 1;
-	PlayerStats.health = PlayerStats.max_health;
+func health():
+	if PlayerStats.health >= 75:
+		PlayerStats.health = PlayerStats.max_health;		
+	else:
+		PlayerStats.health += 25;

@@ -72,6 +72,7 @@ shape = SubResource( 3 )
 [node name="Hitbox" parent="." instance=ExtResource( 8 )]
 visible = false
 collision_mask = 2147483680
+damage = 5
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 4 )

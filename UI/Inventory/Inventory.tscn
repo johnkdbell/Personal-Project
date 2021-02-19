@@ -263,7 +263,6 @@ Left Mouse Button
 Fullscreen: F11
 Restart: R
 Quit: ESC"
-percent_visible = -0.25
 __meta__ = {
 "_edit_use_anchors_": false
 }
