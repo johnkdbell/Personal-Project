@@ -44,7 +44,7 @@ animations = [ {
 radius = 192.35
 
 [sub_resource type="CircleShape2D" id=9]
-radius = 7.07107
+radius = 15.0
 
 [sub_resource type="CapsuleShape2D" id=10]
 radius = 5.0
@@ -94,11 +94,10 @@ modulate = Color( 1, 1, 1, 0.0941176 )
 shape = SubResource( 8 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 6 )]
-visible = false
 collision_layer = 8
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( 0, 1 )
+position = Vector2( 0, 3 )
 shape = SubResource( 9 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 8 )]
@@ -110,6 +109,7 @@ position = Vector2( 0, 3 )
 shape = SubResource( 10 )
 
 [node name="SoftCollision" parent="." instance=ExtResource( 9 )]
+visible = false
 position = Vector2( 0, 4 )
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]

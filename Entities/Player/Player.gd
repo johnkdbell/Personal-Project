@@ -53,7 +53,7 @@ func _physics_process(delta):
 		SHOOT:
 			move_state(delta);
 			apply_movement();
-	
+
 func move_state(delta):
 	var input_vector = Vector2.ZERO;	
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left");
@@ -61,9 +61,13 @@ func move_state(delta):
 	input_vector = input_vector.normalized();
 	
 	if Input.is_action_pressed("right_mouse_button"):
+		$AimingLaser.is_casting = true;
+		$AimingLaser.cast_to = get_transform().affine_inverse() * get_global_mouse_position() * 10;		
 		if Input.is_action_just_pressed("shoot"):
 			state = SHOOT;
 			spawn_arrow();
+	elif Input.is_action_just_released("right_mouse_button"):
+		$AimingLaser.is_casting = false;
 	elif Input.is_action_just_pressed("left_mouse_button"):
 		velocity = Vector2.ZERO;
 		state = ATTACK;

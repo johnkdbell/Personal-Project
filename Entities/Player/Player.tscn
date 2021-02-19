@@ -1,8 +1,9 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://Shaders/JitterFreePixelArt.tres" type="Material" id=1]
 [ext_resource path="res://Entities/Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Shaders/DamageFlash.shader" type="Shader" id=3]
+[ext_resource path="res://Entities/Player/AimingLaser.gd" type="Script" id=4]
 [ext_resource path="res://Raw Resources/Sprites/Shadows/LargeShadow Animated.png" type="Texture" id=7]
 [ext_resource path="res://Overlap/Hitbox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Entities/Player/MeleeHitbox.gd" type="Script" id=9]
@@ -540,6 +541,10 @@ height = 4.72201
 [sub_resource type="CircleShape2D" id=42]
 radius = 112.134
 
+[sub_resource type="Gradient" id=43]
+offsets = PoolRealArray( 0.235897, 0.651163, 0.953488 )
+colors = PoolColorArray( 0.8, 0, 0, 0, 1, 0, 0.211765, 1, 0.976563, 0, 0.0449731, 0.941176 )
+
 [node name="Player" type="KinematicBody2D"]
 material = SubResource( 1 )
 collision_layer = 2
@@ -636,6 +641,27 @@ one_shot = true
 process_mode = 0
 wait_time = 0.05
 autostart = true
+
+[node name="AimingLaser" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 1000, 0 )
+collision_mask = 23
+collide_with_areas = true
+script = ExtResource( 4 )
+
+[node name="Line2D" type="Line2D" parent="AimingLaser"]
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 5.0
+default_color = Color( 0.4, 0.501961, 1, 1 )
+gradient = SubResource( 43 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+sharp_limit = 0.0
+round_precision = 1000
+antialiased = true
+
+[node name="Tween" type="Tween" parent="AimingLaser"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="body_entered" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_exited"]
