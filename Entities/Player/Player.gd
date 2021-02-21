@@ -63,7 +63,7 @@ func move_state(delta):
 	if Input.is_action_pressed("right_mouse_button"):
 		$AimingLaser.is_casting = true;
 		$AimingLaser.cast_to = get_transform().affine_inverse() * get_global_mouse_position() * 10;		
-		if Input.is_action_just_pressed("shoot") || Input.is_action_pressed("shoot"):
+		if Input.is_action_just_pressed("left_mouse_button") || Input.is_action_pressed("left_mouse_button"):
 			state = SHOOT;
 #			weapon.shoot();
 	elif Input.is_action_just_released("right_mouse_button"):
@@ -125,10 +125,15 @@ func add_scent():
 
 func _on_Hurtbox_area_entered(area):
 	if hurtbox.invincible == true:
+		stats.battery -= 0;
 		stats.health -= 0;
 	else:
 		screenShake.start(0.2, 10, 10);
 		hurtbox.start_invincibility(3);
 		hurtbox.create_hit_effect();
 		animationPlayer.play("FlashDamage")
-		stats.health -= area.damage;
+		if stats.battery == 0:
+			stats.health -= area.damage;
+		else:
+			stats.battery -= area.damage;
+			

@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Raw Resources/Sprites/World/Background/GreenGrass.png" type="Texture" id=2]
@@ -10,8 +10,9 @@
 [ext_resource path="res://Entities/Enemies/Slimeo.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Maps/Ammo.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Raw Resources/Sprites/UI/crt.png" type="Texture" id=10]
-[ext_resource path="res://UI/Inventory/Inventory.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Maps/Battery.tscn" type="PackedScene" id=11]
 [ext_resource path="res://UI/UserInterface.gd" type="Script" id=12]
+[ext_resource path="res://UI/BatteryUI.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Raw Resources/Sprites/World/Duplex.png" type="Texture" id=14]
 [ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Shaders/JitterFreePixelArt.tres" type="Material" id=16]
@@ -68,7 +69,7 @@ font_path = "res://Fonts/quaver.ttf"
 [sub_resource type="DynamicFont" id=5]
 size = 8
 outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
+outline_color = Color( 0, 0, 0, 0.784314 )
 use_filter = true
 font_data = SubResource( 4 )
 
@@ -507,19 +508,22 @@ __meta__ = {
 
 [node name="HealthUI" parent="UserInterface" instance=ExtResource( 15 )]
 light_mask = -2147483647
-margin_left = 4.0
-margin_top = 248.0
-margin_right = 50.0
-margin_bottom = 263.0
+margin_left = 10.0
+margin_top = 244.0
+margin_right = 54.0
+margin_bottom = 264.0
 
-[node name="Inventory" parent="UserInterface" instance=ExtResource( 11 )]
-visible = false
+[node name="BatteryUI" parent="UserInterface" instance=ExtResource( 13 )]
+margin_left = 58.0
+margin_top = 244.0
+margin_right = 106.0
+margin_bottom = 264.0
 
 [node name="WeaponUI" parent="UserInterface" instance=ExtResource( 3 )]
-margin_left = 390.0
-margin_top = 248.0
-margin_right = 471.0
-margin_bottom = 263.0
+margin_left = 394.0
+margin_top = 244.0
+margin_right = 472.0
+margin_bottom = 264.0
 
 [node name="Light" type="ColorRect" parent="UserInterface"]
 visible = false
@@ -545,17 +549,19 @@ __meta__ = {
 
 [node name="Controls" type="Control" parent="UserInterface"]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = 63.0
+margin_top = 24.0
+margin_right = 184.0
+margin_bottom = 203.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="NinePatchRect" type="NinePatchRect" parent="UserInterface/Controls"]
-margin_left = 67.0
-margin_top = 50.0
-margin_right = 185.0
-margin_bottom = 226.0
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 121.0
+margin_bottom = 189.0
 texture = ExtResource( 25 )
 patch_margin_left = 5
 patch_margin_top = 5
@@ -571,8 +577,8 @@ margin_top = 12.0
 margin_right = 108.0
 margin_bottom = 164.0
 custom_fonts/font = SubResource( 5 )
-custom_colors/font_color = Color( 1, 0.701961, 0, 0.784314 )
-text = "Shoot Arrows:
+custom_colors/font_color = Color( 1, 0.807843, 0.231373, 1 )
+text = "Shoot:
 Hold Right MB + Left MB
 
 Absorb Items:
@@ -581,17 +587,38 @@ Hold TAB or Middle MB
 Melee Attack:
 Left Mouse Button
 
+Reload: R
 Fullscreen: F11
+Restart: F5
+Quit: ESC
 
-Restart: R
-
-Quit: ESC"
+Close Window: E"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CRT Shader" type="TextureRect" parent="UserInterface"]
+[node name="CRT" type="Control" parent="UserInterface"]
 visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthUICRT" parent="UserInterface/CRT" instance=ExtResource( 15 )]
+light_mask = -2147483647
+margin_left = 66.0
+margin_top = 229.0
+margin_right = 112.0
+margin_bottom = 244.0
+
+[node name="WeaponUICRT" parent="UserInterface/CRT" instance=ExtResource( 3 )]
+margin_left = 338.0
+margin_top = 229.0
+margin_right = 416.0
+margin_bottom = 244.0
+
+[node name="CRT Shader" type="TextureRect" parent="UserInterface/CRT"]
 material = SubResource( 6 )
 margin_right = 480.0
 margin_bottom = 270.0
@@ -601,8 +628,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CRT Overlay" type="TextureRect" parent="UserInterface"]
-visible = false
+[node name="CRT Overlay" type="TextureRect" parent="UserInterface/CRT"]
 margin_right = 480.0
 margin_bottom = 270.0
 texture = ExtResource( 10 )
@@ -738,10 +764,6 @@ material = SubResource( 22 )
 position = Vector2( 237.312, 162 )
 FRICTION = 0.5
 
-[node name="Timer" type="Timer" parent="YSort/Player"]
-wait_time = 0.5
-one_shot = true
-
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
 position = Vector2( -9.53674e-07, 0 )
 remote_path = NodePath("Camera2D")
@@ -771,12 +793,20 @@ playback_process_mode = 0
 
 [node name="ScreenShake" parent="YSort/Player/RemoteTransform2D/Camera2D" instance=ExtResource( 20 )]
 
+[node name="Timer" type="Timer" parent="YSort/Player"]
+wait_time = 0.5
+one_shot = true
+
 [node name="Items (YSort)" type="YSort" parent="YSort"]
 
 [node name="Ammo" parent="YSort/Items (YSort)" instance=ExtResource( 9 )]
 position = Vector2( 178, 253 )
 ABSORBABLE = true
 PISTOL9MM = true
+
+[node name="Battery" parent="YSort/Items (YSort)" instance=ExtResource( 11 )]
+position = Vector2( 571, 25 )
+ABSORBABLE = true
 
 [node name="Medkit" parent="YSort/Items (YSort)" instance=ExtResource( 17 )]
 position = Vector2( 582.711, 17 )

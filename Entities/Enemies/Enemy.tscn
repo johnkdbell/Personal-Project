@@ -159,10 +159,12 @@ radius = 4.0
 radius = 56.0
 
 [sub_resource type="CapsuleShape2D" id=32]
+radius = 23.7592
 height = 12.0
 
-[sub_resource type="CircleShape2D" id=33]
-radius = 14.1842
+[sub_resource type="CapsuleShape2D" id=33]
+radius = 10.0674
+height = 8.57206
 
 [node name="Enemy" type="KinematicBody2D"]
 position = Vector2( 0, -9 )
@@ -178,7 +180,6 @@ KNOCKBACK_AMOUNT = 10
 max_health = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, -3 )
 shape = SubResource( 1 )
 
@@ -270,9 +271,11 @@ position = Vector2( 0, 3 )
 shape = SubResource( 32 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 13 )]
-visible = false
+collision_mask = 2147483680
+damage = 10
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2( 0, -3 )
 shape = SubResource( 33 )
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="body_entered" from="CloseToPlayer" to="CloseToPlayer" method="_on_CloseToPlayer_body_entered"]

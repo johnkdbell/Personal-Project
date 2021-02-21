@@ -93,6 +93,7 @@ modulate = Color( 1, 1, 1, 0.0941176 )
 shape = SubResource( 8 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 6 )]
+visible = false
 collision_layer = 8
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
@@ -100,7 +101,6 @@ position = Vector2( 0, 3 )
 shape = SubResource( 9 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 8 )]
-visible = false
 collision_mask = 2147483680
 damage = 10
 

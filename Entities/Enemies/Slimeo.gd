@@ -86,13 +86,13 @@ func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage;
 	knockback = area.knockback_vector * (KNOCKBACK_AMOUNT * 10);
 	hurtbox.create_hit_effect();
+	
 	var blood_instance = blood.instance();
 	get_tree().current_scene.add_child(blood_instance);
 	blood_instance.global_position = global_position;
-	blood_instance.color = Color(0,255,0,200);
+	blood_instance.color = Color(0,1,0,0.75);
 	blood_instance.spread = int(rand_range(5,90));
 	blood_instance.amount = int(rand_range(1,20));
-	print(blood_instance.spread)
 	blood_instance.rotation = global_position.angle_to_point(area.global_position);
 	
 func _on_Stats_no_health():

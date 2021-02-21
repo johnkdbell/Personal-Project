@@ -17,18 +17,18 @@ use_filter = true
 font_data = SubResource( 1 )
 
 [node name="HealthUI" type="Control"]
-margin_right = 80.0
-margin_bottom = 17.0
+margin_top = 1.0
+margin_right = 44.0
+margin_bottom = 18.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color( 0, 0, 0, 0.27451 )
-margin_left = -2.0
-margin_top = -3.0
-margin_right = 48.0
+modulate = Color( 0, 0, 0, 0.54902 )
+margin_top = -1.0
+margin_right = 44.0
 margin_bottom = 20.0
 texture = ExtResource( 4 )
 expand = true
@@ -37,13 +37,27 @@ __meta__ = {
 }
 
 [node name="Health" type="Label" parent="."]
-margin_left = 5.0
+margin_left = 16.0
+margin_top = 1.0
 margin_right = 41.0
-margin_bottom = 16.0
+margin_bottom = 17.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 0.74902, 0, 1 )
-text = "+ 100"
+text = "100"
 align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Symbol" type="Label" parent="."]
+margin_left = 5.0
+margin_top = 1.0
+margin_right = 13.0
+margin_bottom = 17.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 0.74902, 0, 0.882353 )
+text = "+"
 valign = 2
 __meta__ = {
 "_edit_use_anchors_": false

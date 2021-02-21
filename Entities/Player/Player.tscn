@@ -669,11 +669,9 @@ antialiased = true
 script = ExtResource( 13 )
 
 [node name="Pistol9mm" parent="WeaponManager" instance=ExtResource( 5 )]
-max_ammo = 20
+projectileDelay = 0.25
 
 [node name="MP5" parent="WeaponManager" instance=ExtResource( 6 )]
-projectileDelay = 0.05
-automatic = true
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="body_entered" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_exited"]

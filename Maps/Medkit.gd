@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
-export var ACCELERATION = 900;
-export var MAX_SPEED = 1000;
-export var FRICTION = 1.05;
+const ACCELERATION = 900;
+const MAX_SPEED = 1000;
+const FRICTION = 1.05;
 export(bool) var ABSORBABLE;
 export(bool) var FLOATING_TAB;
 
@@ -49,6 +49,7 @@ func move_towards_direction(delta):
 		
 		
 func health():
+	print(PlayerStats.health)
 	if PlayerStats.health >= 75:
 		PlayerStats.health = PlayerStats.max_health;		
 	else:

@@ -4,7 +4,7 @@
 [ext_resource path="res://Maps/Medkit.gd" type="Script" id=2]
 [ext_resource path="res://UI/World/Tab.png" type="Texture" id=3]
 [ext_resource path="res://Shaders/JitterFreePixelArt.shader" type="Shader" id=4]
-[ext_resource path="res://Raw Resources/Sprites/Shit Sprites/heart_3.png" type="Texture" id=5]
+[ext_resource path="res://Raw Resources/Sprites/Shit Sprites/Medkit.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4.41238, 4.98715 )
@@ -82,6 +82,7 @@ autoplay = "Float"
 anims/Float = SubResource( 2 )
 
 [node name="PlayerDetection" parent="." instance=ExtResource( 1 )]
+visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" parent="PlayerDetection" index="0"]
@@ -92,6 +93,7 @@ material = SubResource( 4 )
 position = Vector2( 0, -0.52965 )
 frames = SubResource( 7 )
 animation = "tab_arrow"
+frame = 1
 playing = true
 offset = Vector2( 0, -40 )
 

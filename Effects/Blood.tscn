@@ -15,7 +15,6 @@ initial_velocity = 200.0
 initial_velocity_random = 1.0
 scale_amount = 0.01
 scale_amount_random = 0.06
-color = Color( 0.623529, 0, 0.027451, 0.941176 )
 script = ExtResource( 2 )
 
 [node name="Timer" type="Timer" parent="."]

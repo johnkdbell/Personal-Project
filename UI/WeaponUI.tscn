@@ -15,17 +15,18 @@ use_filter = true
 font_data = SubResource( 1 )
 
 [node name="WeaponUI" type="Control"]
+margin_top = 1.0
 margin_right = 24.0
-margin_bottom = 16.0
+margin_bottom = 17.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color( 0, 0, 0, 0.27451 )
-margin_top = -3.0
-margin_right = 88.0
+modulate = Color( 0, 0, 0, 0.54902 )
+margin_top = -1.0
+margin_right = 74.0
 margin_bottom = 20.0
 texture = ExtResource( 2 )
 expand = true
@@ -34,11 +35,12 @@ __meta__ = {
 }
 
 [node name="Ammo" type="Label" parent="."]
-margin_right = 80.0
-margin_bottom = 16.0
+margin_top = 1.0
+margin_right = 71.0
+margin_bottom = 17.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 0.74902, 0, 1 )
-text = "_ 10/10"
+text = "_ 17/340"
 align = 2
 valign = 2
 __meta__ = {
