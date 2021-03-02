@@ -5,7 +5,6 @@ var max_battery = 100 setget set_max_battery;
 
 func set_battery(value):
 	battery = clamp(value, 0, max_battery);
-	$Symbol.text = "||| "
 	$Battery.text = String(battery);
 
 func set_max_battery(value):

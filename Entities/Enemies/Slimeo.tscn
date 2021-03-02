@@ -39,21 +39,24 @@ animations = [ {
 } ]
 
 [sub_resource type="CircleShape2D" id=7]
+radius = 9.05539
 
 [sub_resource type="CircleShape2D" id=8]
 radius = 192.35
 
 [sub_resource type="CircleShape2D" id=9]
-radius = 15.0
-
-[sub_resource type="CapsuleShape2D" id=10]
-radius = 5.0
-height = 0.0
-
-[sub_resource type="CircleShape2D" id=11]
 radius = 25.0
 
-[node name="Slimeo" type="KinematicBody2D"]
+[sub_resource type="CircleShape2D" id=10]
+radius = 1.0
+
+[sub_resource type="CapsuleShape2D" id=11]
+radius = 11.0
+height = 0.0
+
+[node name="Slimeo" type="KinematicBody2D" groups=[
+"Enemies",
+]]
 collision_layer = 16
 collision_mask = 2147483667
 script = ExtResource( 2 )
@@ -66,6 +69,7 @@ max_health = 6
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
 animation = "walk"
+frame = 4
 playing = true
 
 [node name="Shadow" type="Sprite" parent="."]
@@ -78,10 +82,13 @@ texture = ExtResource( 4 )
 visible = false
 wander_range = 128
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="RayCast2D" type="RayCast2D" parent="."]
 visible = false
-position = Vector2( 0, 3 )
-scale = Vector2( 0.4, 0.4 )
+
+[node name="Collider" type="CollisionShape2D" parent="." groups=[
+"Enemies",
+]]
+modulate = Color( 0, 1, 0.694118, 1 )
 shape = SubResource( 7 )
 
 [node name="PlayerDetection" parent="." instance=ExtResource( 3 )]
@@ -92,38 +99,37 @@ collision_mask = 2
 modulate = Color( 1, 1, 1, 0.0941176 )
 shape = SubResource( 8 )
 
-[node name="Hurtbox" parent="." instance=ExtResource( 6 )]
+[node name="SoftCollision" parent="." instance=ExtResource( 9 )]
 visible = false
+position = Vector2( 0, 4 )
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+shape = SubResource( 9 )
+
+[node name="Hurtbox" parent="." groups=[
+"Enemies",
+] instance=ExtResource( 6 )]
+visible = false
+modulate = Color( 1, 0, 0.843137, 1 )
 collision_layer = 8
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( 0, 3 )
-shape = SubResource( 9 )
+scale = Vector2( 10, 10 )
+shape = SubResource( 10 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 8 )]
 collision_mask = 2147483680
 damage = 10
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2( 0, 3 )
-shape = SubResource( 10 )
-
-[node name="SoftCollision" parent="." instance=ExtResource( 9 )]
-visible = false
-position = Vector2( 0, 4 )
-
-[node name="CollisionShape2D" parent="SoftCollision" index="0"]
 shape = SubResource( 11 )
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
-visible = false
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 
 [editable path="PlayerDetection"]
 
+[editable path="SoftCollision"]
+
 [editable path="Hurtbox"]
 
 [editable path="Hitbox"]
-
-[editable path="SoftCollision"]

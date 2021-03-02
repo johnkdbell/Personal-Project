@@ -82,7 +82,6 @@ autoplay = "Float"
 anims/Float = SubResource( 2 )
 
 [node name="PlayerDetection" parent="." instance=ExtResource( 1 )]
-visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" parent="PlayerDetection" index="0"]

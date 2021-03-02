@@ -16,8 +16,6 @@ signal magazine_size_changed(value);
 signal max_ammo_changed(value)
 signal max_magazine_size_changed(value)
 
-var player_bullet := preload("res://Entities/Player/Weapons/Projectiles/Bullet.tscn");
-
 onready var projectileDelayTimer := $ProjectileDelayTimer;
 #onready var screenShake = get_node("/root/World/YSort/Player/RemoteTransform2D/Camera2D/ScreenShake")
 
@@ -25,51 +23,27 @@ func _ready():
 	self.magazine_size = magazine_size;	
 	self.ammo = ammo;
 	
-func _physics_process(delta):
-	if magazine_size <= 0:
-		if ammo > 0:
-			if ammo >= max_magazine_size:
-				magazine_size += max_magazine_size;
-				ammo -= max_magazine_size;
-	elif magazine_size >= 1 && Input.is_action_just_pressed("reload"):
-		if ammo > 0:
-			var remaing_magazine_size = max_magazine_size - magazine_size
-			if ammo >= max_magazine_size || max_ammo > remaing_magazine_size:
-				ammo -= remaing_magazine_size;
-				magazine_size += remaing_magazine_size;
-	elif ammo < 0:
-		ammo = 0;
-
-func shoot():
-	if automatic == false:
-		if Input.is_action_just_pressed("shoot"):
-			bullet_spawn();
-	elif automatic == true:
-		if Input.is_action_pressed("shoot"):
-			bullet_spawn();
-			
-func bullet_spawn():
-	if magazine_size > 0:
-		if projectileDelayTimer.is_stopped():
-			projectileDelayTimer.start(projectileDelay);
-			var bullet := player_bullet.instance();
-			bullet.rotation = get_angle_to(get_global_mouse_position());
-			bullet.position = global_position;
-			bullet.damage = damage;
-			get_tree().current_scene.add_child(bullet);
-			self.magazine_size -= 1;
-#			screenShake.start(0.05, 5, 10);
-
-
 func set_max_ammo(value):
 	max_ammo = value;
 	self.ammo = min(ammo, max_ammo);
+	emit_signal("max_ammo_changed", max_ammo);
 	
 func set_ammo(value):
 	ammo = value;
+	emit_signal("ammo_changed", ammo);
 	
 func set_max_magazine_size(value):
 	max_magazine_size = value;
+	self.magazine_size = min(magazine_size, max_magazine_size);
+	emit_signal("max_magazine_size_changed", max_magazine_size);
 	
 func set_magazine_size(value):
 	magazine_size = value;
+	emit_signal("magazine_size_changed", magazine_size);
+	
+func restart_weapons():
+	if max_ammo > ammo:
+			ammo = max_ammo
+	if max_magazine_size > magazine_size:
+			magazine_size = max_magazine_size
+

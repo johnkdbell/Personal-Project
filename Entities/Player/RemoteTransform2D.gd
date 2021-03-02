@@ -12,8 +12,7 @@ func _physics_process(delta):
 		get_parent().get_node("RemoteTransform2D/Camera2D").smoothing_speed = 4;
 	else:
 		smooth_camera();
-		
-		
+
 func aim_camera(delta):
 	if Input.is_action_pressed("right_mouse_button"):
 		aiming = true;
@@ -33,7 +32,11 @@ func smooth_camera():
 			position.x = lerp(position.x, MAX_SPEED * ACCELERATION, ACCELERATION)
 		if Input.get_action_strength("ui_down"):
 			position.y = lerp(position.y - 2, MAX_SPEED, ACCELERATION)
-			position.x = lerp(position.y, MAX_SPEED * ACCELERATION, ACCELERATION)
+			position.x = lerp(position.x, MAX_SPEED * ACCELERATION, ACCELERATION)
+		if Input.is_action_just_released("right_mouse_button"):
+			aiming = true;
+			drag(false);
+			start(0.5)
 	elif Input.is_action_just_released("right_mouse_button"):
 		aiming = false;
 		drag(true);
@@ -49,8 +52,8 @@ func start(duration = 0.5):
 
 func _on_Timer_timeout():
 	timer.stop();
-	position.x = clamp(position.x, 50, -50);
-	position.y = clamp(position.y, 50, -50);
+#	position.x = clamp(position.x, 50, -50);
+#	position.y = clamp(position.y, 50, -50);
 	get_parent().get_node("RemoteTransform2D/Camera2D").smoothing_speed = 1;
 	
 	

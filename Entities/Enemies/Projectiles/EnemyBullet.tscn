@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Entities/Enemies/Projectiles/EnemyBullet.gd" type="Script" id=1]
+[ext_resource path="res://Overlap/Hitbox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Entities/Player/Weapons/Projectiles/Bullet.png" type="Texture" id=3]
+[ext_resource path="res://Entities/Player/Weapons/Projectiles/BulletHitbox.gd" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1, 2 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1.10658, 5.48056 )
+
+[node name="EnemyBullet" type="KinematicBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 1 )
+damage = 5
+BULLET_SPEED = 25
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -3.5 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2( 1, 0 )
+scale = Vector2( 1, 0.5 )
+shape = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+scale = Vector2( 1, 1.00363 )
+
+[node name="Hitbox" parent="." instance=ExtResource( 2 )]
+scale = Vector2( 1, 1.00363 )
+collision_mask = 2147483681
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2( 3, 0 )
+scale = Vector2( 0.983836, 0.545409 )
+shape = SubResource( 2 )
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
+
+[editable path="Hitbox"]

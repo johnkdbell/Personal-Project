@@ -1,18 +1,25 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://UI/WeaponUI.gd" type="Script" id=1]
 [ext_resource path="res://Raw Resources/Sprites/Shit Sprites/white.png" type="Texture" id=2]
+[ext_resource path="res://Fonts/halflife2.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Raw Resources/Sprites/UI/UI_hud_background.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFontData" id=1]
-font_path = "res://Fonts/MinimalPixel v2.ttf"
+font_path = "res://Fonts/halflife2.ttf"
 
 [sub_resource type="DynamicFont" id=2]
-size = 14
-outline_size = 1
 outline_color = Color( 0.12549, 0.12549, 0.12549, 0.784314 )
 use_mipmaps = true
 use_filter = true
 font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 8
+outline_color = Color( 0, 0, 0, 0.313726 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 3 )
 
 [node name="WeaponUI" type="Control"]
 margin_top = 1.0
@@ -23,10 +30,42 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color( 0, 0, 0, 0.54902 )
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 17.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="TextureRect" parent="Control"]
+modulate = Color( 0, 0, 0, 0.313726 )
 margin_top = -1.0
-margin_right = 74.0
+margin_right = 25.0
+margin_bottom = 20.0
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="TextureRect" parent="Control"]
+modulate = Color( 0, 0, 0, 0.313726 )
+margin_left = 74.0
+margin_top = 20.0
+margin_right = 99.0
+margin_bottom = 41.0
+rect_rotation = -180.0
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Middle" type="TextureRect" parent="Control"]
+modulate = Color( 0, 0, 0, 0.313726 )
+margin_left = 25.0
+margin_top = -1.0
+margin_right = 49.0
 margin_bottom = 20.0
 texture = ExtResource( 2 )
 expand = true
@@ -34,14 +73,41 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Ammo" type="Label" parent="."]
-margin_top = 1.0
-margin_right = 71.0
-margin_bottom = 17.0
+[node name="MagazineSize" type="Label" parent="."]
+margin_left = 26.0
+margin_top = -1.0
+margin_right = 74.0
+margin_bottom = 19.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 1, 0.74902, 0, 1 )
-text = "_ 17/340"
-align = 2
+custom_colors/font_color = Color( 1, 0.85098, 0, 1 )
+text = "17"
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmmoImage" type="Label" parent="."]
+margin_left = 2.0
+margin_top = -4.0
+margin_right = 24.0
+margin_bottom = 16.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 0.85098, 0, 1 )
+text = "p"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ammo" type="Label" parent="."]
+margin_left = 55.0
+margin_top = -1.0
+margin_right = 67.0
+margin_bottom = 17.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 0.85098, 0, 1 )
+text = "340"
 valign = 2
 __meta__ = {
 "_edit_use_anchors_": false

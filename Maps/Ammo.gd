@@ -7,16 +7,19 @@ export(bool) var ABSORBABLE;
 export(bool) var FLOATING_TAB;
 
 export(bool) var PISTOL9MM;
-export(bool) var MP5
+export(bool) var MP7
 
 var velocity = Vector2.ZERO;
 var being_picked_up = false;
 var player;
 var weapon;
+var active_weapon = weapon;
 
 onready var playerDetection = $PlayerDetection;
 onready var tabFloatingButton = $Tab;
-onready var pistol_9mm_ammo = get_node("/root/World/YSort/Player/WeaponManager/Pistol9mm")
+
+func _ready():
+	active_weapon();
 
 func _physics_process(delta):
 	if FLOATING_TAB == false: # Display floating tab image above item drop
@@ -31,12 +34,9 @@ func pick_up_item(body):
 func item_absorption(delta):
 	active_weapon();
 	if weapon.ammo != weapon.max_ammo:
-#	if WeaponsManager.ammo != WeaponsManager.max_ammo:
-		
 		if (playerDetection.can_see_player() && ABSORBABLE == true):
 			player = playerDetection.player;
 			move_towards_direction(delta)
-			
 		elif (being_picked_up == true && Input.is_action_pressed("pickup")):
 			move_towards_direction(delta)
 			ABSORBABLE = true;
@@ -46,21 +46,22 @@ func item_absorption(delta):
 func move_towards_direction(delta):
 	var direction = global_position.direction_to(player.global_position);
 	var distance = global_position.distance_to(player.global_position);
-	
 	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta);
 	tabFloatingButton.visible = false;
-	
 	if distance < 10:
 		ammo();
 		queue_free();
 		
 func ammo():
-	if PISTOL9MM == true && pistol_9mm_ammo.ammo >= (pistol_9mm_ammo.max_ammo - 17):
-		weapon = pistol_9mm_ammo;
-		pistol_9mm_ammo.ammo = pistol_9mm_ammo.max_ammo;
+	if weapon.ammo >= (weapon.max_ammo - weapon.max_magazine_size):
+		weapon.ammo = weapon.max_ammo;
+		weapon.ammo = weapon.ammo;
 	else:
-		pistol_9mm_ammo.ammo += 17;
+		weapon.ammo += weapon.max_magazine_size;
+		weapon.ammo = weapon.ammo;
 		
 func active_weapon():
 	if PISTOL9MM == true:
-		weapon = pistol_9mm_ammo;
+		weapon = PlayerWeapons.get_node("Pistol9mm");
+	if MP7 == true:
+		weapon = PlayerWeapons.get_node("MP7");

@@ -92,7 +92,6 @@ material = SubResource( 4 )
 position = Vector2( 0, -0.52965 )
 frames = SubResource( 7 )
 animation = "tab_arrow"
-frame = 1
 playing = true
 offset = Vector2( 0, -40 )
 

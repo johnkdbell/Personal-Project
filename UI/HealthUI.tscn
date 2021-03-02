@@ -1,17 +1,17 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://UI/HealthUI.gd" type="Script" id=1]
 [ext_resource path="res://Raw Resources/Sprites/Shit Sprites/heart_4.png" type="Texture" id=2]
 [ext_resource path="res://Raw Resources/Sprites/Shit Sprites/heart_3.png" type="Texture" id=3]
 [ext_resource path="res://Raw Resources/Sprites/Shit Sprites/white.png" type="Texture" id=4]
+[ext_resource path="res://Raw Resources/Sprites/UI/UI_hud_background.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFontData" id=1]
-font_path = "res://Fonts/MinimalPixel v2.ttf"
+font_path = "res://Fonts/halflife2.ttf"
 
 [sub_resource type="DynamicFont" id=2]
-size = 14
 outline_size = 1
-outline_color = Color( 0.12549, 0.12549, 0.12549, 0.784314 )
+outline_color = Color( 0.627451, 0.478431, 0.0352941, 0.0392157 )
 use_mipmaps = true
 use_filter = true
 font_data = SubResource( 1 )
@@ -25,10 +25,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color( 0, 0, 0, 0.54902 )
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="TextureRect" parent="Control"]
+modulate = Color( 0, 0, 0, 0.313726 )
 margin_top = -1.0
-margin_right = 44.0
+margin_right = 25.0
+margin_bottom = 20.0
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Middle" type="TextureRect" parent="Control"]
+modulate = Color( 0, 0, 0, 0.313726 )
+margin_left = 25.0
+margin_top = -1.0
+margin_right = 33.0
 margin_bottom = 20.0
 texture = ExtResource( 4 )
 expand = true
@@ -36,28 +55,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Health" type="Label" parent="."]
-margin_left = 16.0
-margin_top = 1.0
-margin_right = 41.0
-margin_bottom = 17.0
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 1, 0.74902, 0, 1 )
-text = "100"
-align = 2
-valign = 2
+[node name="Right" type="TextureRect" parent="Control"]
+modulate = Color( 0, 0, 0, 0.313726 )
+margin_left = 58.0
+margin_top = 20.0
+margin_right = 83.0
+margin_bottom = 41.0
+rect_rotation = -180.0
+texture = ExtResource( 5 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Symbol" type="Label" parent="."]
-margin_left = 5.0
-margin_top = 1.0
-margin_right = 13.0
-margin_bottom = 17.0
+[node name="Health" type="Label" parent="."]
+margin_left = 29.0
+margin_top = -1.0
+margin_right = 56.0
+margin_bottom = 19.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 1, 0.74902, 0, 0.882353 )
-text = "+"
+custom_colors/font_color = Color( 1, 0.85098, 0, 1 )
+text = "100"
 valign = 2
 __meta__ = {
 "_edit_use_anchors_": false

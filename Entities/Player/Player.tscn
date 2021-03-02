@@ -1,18 +1,17 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://Shaders/JitterFreePixelArt.tres" type="Material" id=1]
 [ext_resource path="res://Entities/Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Shaders/DamageFlash.shader" type="Shader" id=3]
 [ext_resource path="res://Entities/Player/AimingLaser.gd" type="Script" id=4]
-[ext_resource path="res://Entities/Player/Weapons/Pistol9mm.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Entities/Player/Weapons/MP5.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Entities/Player/Weapons/WeaponManager.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Raw Resources/Sprites/Shit Sprites/light.png" type="Texture" id=6]
 [ext_resource path="res://Raw Resources/Sprites/Shadows/LargeShadow Animated.png" type="Texture" id=7]
 [ext_resource path="res://Overlap/Hitbox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Entities/Player/MeleeHitbox.gd" type="Script" id=9]
 [ext_resource path="res://Raw Resources/Sprites/Characters/Red/walk.png" type="Texture" id=10]
 [ext_resource path="res://Entities/Player/PickupZone.gd" type="Script" id=11]
 [ext_resource path="res://Entities/Player/Hurtbox.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Entities/Player/WeaponManager.gd" type="Script" id=13]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -545,10 +544,12 @@ height = 4.72201
 radius = 112.134
 
 [sub_resource type="Gradient" id=43]
-offsets = PoolRealArray( 0.235897, 0.651163, 0.953488 )
-colors = PoolColorArray( 0.8, 0, 0, 0, 1, 0, 0.211765, 1, 0.976563, 0, 0.0449731, 0.941176 )
+offsets = PoolRealArray( 0, 0.970874, 1 )
+colors = PoolColorArray( 0.788235, 0, 0, 0, 0.745098, 0, 0, 1, 1, 0, 0, 1 )
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
 material = SubResource( 1 )
 collision_layer = 2
 collision_mask = 0
@@ -561,8 +562,9 @@ texture = ExtResource( 10 )
 offset = Vector2( 0, -9 )
 hframes = 24
 
-[node name="Collider" type="CollisionShape2D" parent="."]
-visible = false
+[node name="Collider" type="CollisionShape2D" parent="." groups=[
+"Player",
+]]
 position = Vector2( 0.5, 2 )
 shape = SubResource( 2 )
 
@@ -653,7 +655,7 @@ script = ExtResource( 4 )
 
 [node name="Line2D" type="Line2D" parent="AimingLaser"]
 points = PoolVector2Array( 0, 0, 0, 0 )
-width = 5.0
+width = 2.0
 default_color = Color( 0.4, 0.501961, 1, 1 )
 gradient = SubResource( 43 )
 joint_mode = 2
@@ -665,13 +667,16 @@ antialiased = true
 
 [node name="Tween" type="Tween" parent="AimingLaser"]
 
-[node name="WeaponManager" type="Node2D" parent="."]
-script = ExtResource( 13 )
+[node name="Light" type="Sprite" parent="AimingLaser"]
 
-[node name="Pistol9mm" parent="WeaponManager" instance=ExtResource( 5 )]
-projectileDelay = 0.25
+[node name="Light2D" type="Light2D" parent="AimingLaser/Light"]
+visible = false
+position = Vector2( 1, 41 )
+texture = ExtResource( 6 )
+color = Color( 0.705882, 0.662745, 0.560784, 1 )
+shadow_color = Color( 1, 1, 1, 0 )
 
-[node name="MP5" parent="WeaponManager" instance=ExtResource( 6 )]
+[node name="WeaponManager" parent="." instance=ExtResource( 5 )]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="body_entered" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_entered"]
 [connection signal="body_exited" from="PickupZone" to="PickupZone" method="_on_PickupZone_body_exited"]

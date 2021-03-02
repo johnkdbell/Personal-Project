@@ -8,7 +8,6 @@ var max_health = 100 setget set_max_health;
 
 func set_health(value):
 	health = clamp(value, 0, max_health);
-	$Symbol.text = "+ ";	
 	$Health.text = String(health);
 #	if heartUIFull != null:
 #		heartUIFull.rect_size.x = hearts * 18;

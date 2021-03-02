@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Entities/Player/Weapons/MP7.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Entities/Player/Weapons/Pistol9mm.tscn" type="PackedScene" id=3]
+
+[node name="PlayerWeapons" type="Node"]
+
+[node name="Pistol9mm" parent="." instance=ExtResource( 3 )]
+projectileDelay = 0.25
+damage = 2
+max_ammo = 150
+ammo = 36
+max_magazine_size = 18
+magazine_size = 18
+
+[node name="MP7" parent="." instance=ExtResource( 2 )]
+automatic = true
+max_ammo = 225
+ammo = 180
+max_magazine_size = 45
+magazine_size = 45

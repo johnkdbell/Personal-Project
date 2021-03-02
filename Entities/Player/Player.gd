@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 export var MAX_SPEED = 150;
 export var ACCELERATION = 3;
-export var FRICTION = 0.3;
+export var FRICTION = 0.4;
 
 enum {
 	MOVE,
@@ -19,7 +19,11 @@ var roll_vector = Vector2.DOWN;
 var is_move = true;
 var scent_trail = [];
 var stats = PlayerStats;
+var flashlight_off = true;
 
+var player_vol = Vector2(1,1) #For AI Shooting?
+
+onready var weapon = PlayerWeapons.get_node("Pistol9mm");
 onready var	animationPlayer = $AnimationPlayer;
 onready var animationTree = $AnimationTree;
 onready var animationState = animationTree.get("parameters/playback");
@@ -31,7 +35,6 @@ onready var screenShake = $RemoteTransform2D/Camera2D/ScreenShake;
 #onready var weapon = $WeaponManager/Pistol9mm;
 onready var weapon_manager = $WeaponManager;
 
-
 func _ready():
 	meleeHitbox.knockback_vector = roll_vector;
 	$ScentTimer.connect("timeout", self, "add_scent");
@@ -41,6 +44,8 @@ func _ready():
 
 func _physics_process(delta):
 	absorption_press();
+	flashlight();
+	
 	weapon_manager.input();
 	match state:
 		MOVE:
@@ -62,7 +67,7 @@ func move_state(delta):
 	
 	if Input.is_action_pressed("right_mouse_button"):
 		$AimingLaser.is_casting = true;
-		$AimingLaser.cast_to = get_transform().affine_inverse() * get_global_mouse_position() * 10;		
+		$AimingLaser.cast_to = get_transform().affine_inverse() * get_global_mouse_position() * 10;
 		if Input.is_action_just_pressed("left_mouse_button") || Input.is_action_pressed("left_mouse_button"):
 			state = SHOOT;
 #			weapon.shoot();
@@ -136,4 +141,53 @@ func _on_Hurtbox_area_entered(area):
 			stats.health -= area.damage;
 		else:
 			stats.battery -= area.damage;
-			
+
+func flashlight():
+	$AimingLaser/Light/Light2D.position = (get_transform().affine_inverse() * get_global_mouse_position()) / 1.5;
+	
+	if flashlight_off == false:
+		if stats.flashlight > 0:
+			stats.flashlight -= 0.01;
+			light(true, 1)
+		elif stats.flashlight <= 0:
+			stats.flashlight -= 0;
+			light(false, 0.5)
+	elif flashlight_off == true:
+		if stats.flashlight < 100:
+			stats.flashlight += 0.02;
+			light(false, 0.5)
+
+	if Input.is_action_just_pressed("flashlight") && flashlight_off == false:
+		flashlight_off = true;
+	elif Input.is_action_just_pressed("flashlight") && flashlight_off == true:
+		if DayNightCycle.hour >= 6 && DayNightCycle.hour < 21:
+			if stats.flashlight > 0:
+				flashlight_off = false;
+			elif stats.flashlight <= 0:
+				flashlight_off = true;
+		else:
+			if stats.flashlight > 0:
+				flashlight_off = false;
+			elif stats.flashlight <= 0:
+				flashlight_off = true;
+
+func light(active, lighting):
+	if active == true:
+		flashlight_off = false;
+		$AimingLaser/Light/Light2D.color = Color(0.71,0.66,0.56,lighting);
+		$AimingLaser/Light/Light2D.show();
+		$AimingLaser/Light/Light2D.visible;
+	elif active == false:
+		flashlight_off = true;
+		$AimingLaser/Light/Light2D.color = Color(0.71,0.66,0.56,lighting);
+		$AimingLaser/Light/Light2D.hide();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

@@ -47,7 +47,6 @@ func move_towards_direction(delta):
 		battery();
 		queue_free();
 		
-		
 func battery():
 	print(PlayerStats.battery)
 	if PlayerStats.battery >= 85:

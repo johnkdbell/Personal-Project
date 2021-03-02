@@ -11,9 +11,11 @@ const blood = preload("res://Effects/Blood.tscn");
 enum {
 	IDLE,
 	WANDER,
-	CHASE
+	CHASE,
+	ATTACK
 }
 
+var enemy_bullet := preload("res://Entities/Enemies/Projectiles/EnemyBullet.tscn");
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO;
 var state = CHASE;
@@ -28,6 +30,8 @@ onready var closeToPlayer = $CloseToPlayer;
 onready var wanderController = $WanderController;
 onready var hurtbox = $Hurtbox;
 onready var stats = $Stats;
+
+onready var player_carl = get_node("/root/World/YSort/Player");
 
 func _ready():
 	starting_position = get_global_position();
@@ -44,6 +48,7 @@ func _physics_process(delta):
 			sprite.stop();
 			sprite.frame = 0;
 			seek_player();
+			bullet_spawn()
 			if wanderController.get_time_left() == 0:
 				update_wander();
 			
@@ -63,18 +68,21 @@ func _physics_process(delta):
 			else:
 				chase_towards_point(starting_position, delta, true)
 			stand_next_to();
-					
+			
+		ATTACK:
+			pass
+
 func wander_towards_point(area, delta):
 	direction = global_position.direction_to(area);
 	velocity = velocity.move_toward(direction * (MAX_SPEED / 4), FRICTION * delta);
 	player_follow = int(4.0 * (direction.rotated(PI / 4.0).angle() + PI) / TAU)
 	follow_direction();
-	
+
 func chase_towards_point(area, delta, returning_home):
 	direction = global_position.direction_to(area);
 	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta);
 	animate_while_moving(delta, returning_home);
-	
+
 func animate_while_moving(delta, returning_home):	
 	if velocity.length() > 0.1:
 		player_follow = int(4.0 * (direction.rotated(PI / 4.0).angle() + PI) / TAU)
@@ -88,15 +96,15 @@ func animate_while_moving(delta, returning_home):
 func seek_player():
 	if playerDetection.can_see_player():
 		state = CHASE;
-		
+
 func update_wander():
 	state = pick_random_state([IDLE, WANDER]);
 	wanderController.start_wander_timer(rand_range(1, 3));
-	
+
 func pick_random_state(state_list):
 	state_list.shuffle();
 	return state_list.pop_front();
-		
+
 func stand_next_to():
 	if closeToPlayer.can_see_player():
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION);
@@ -127,9 +135,24 @@ func _on_Hurtbox_area_entered(area):
 	blood_instance.spread = int(rand_range(5,90));
 	blood_instance.amount = int(rand_range(1,10));
 	blood_instance.rotation = global_position.angle_to_point(area.global_position);
-	
+
 func _on_Stats_no_health():
 	queue_free();
 	var enemyDeathEffect = EnemyDeathEffect.instance();
 	get_parent().add_child(enemyDeathEffect);
 	enemyDeathEffect.global_position = global_position;
+
+
+func _on_Timer_timeout():
+	bullet_spawn();
+	
+func bullet_spawn():
+	if player_carl:
+		var bullet := enemy_bullet.instance();
+		bullet.dir = get_angle_to(player_carl.position + Vector2(0.5,0.5));
+		bullet.rotation = get_angle_to(player_carl.position);
+		bullet.global_position = position;
+		print(bullet.damage)
+		get_parent().add_child(bullet);
+	else:
+		pass
