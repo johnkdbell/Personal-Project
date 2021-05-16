@@ -34,4 +34,5 @@ __meta__ = {
 
 [node name="SmoothHour" type="Timer" parent="."]
 autostart = true
+
 [connection signal="timeout" from="SmoothHour" to="." method="_on_SmoothHour_timeout"]

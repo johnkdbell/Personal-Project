@@ -1,5 +1,6 @@
 extends Camera2D
 
+#Zoom camera
 func _input(event):	
 	if event is InputEventMouseButton:
 		if event.is_pressed():

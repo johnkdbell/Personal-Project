@@ -30,6 +30,12 @@ PlayerStats="*res://Entities/Player/PlayerStats.tscn"
 PlayerWeapons="*res://Entities/Player/Weapons/PlayerWeapons.tscn"
 DayNightCycle="*res://Maps/DayNightCycle.tscn"
 
+[debug]
+
+gdscript/warnings/unused_argument=false
+gdscript/warnings/unused_signal=false
+gdscript/warnings/return_value_discarded=false
+
 [display]
 
 window/size/width=480

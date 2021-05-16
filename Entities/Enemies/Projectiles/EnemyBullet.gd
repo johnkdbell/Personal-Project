@@ -24,7 +24,6 @@ func _launch_arrow():
 	$Hitbox.knockback_vector = angle / 2000;
 
 func _on_Hitbox_body_entered(body):
-	queue_free();
 	if body.is_in_group("Player"):
 		queue_free();
 	if body.is_in_group("Collision"):

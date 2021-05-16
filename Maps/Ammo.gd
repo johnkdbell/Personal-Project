@@ -19,7 +19,7 @@ onready var playerDetection = $PlayerDetection;
 onready var tabFloatingButton = $Tab;
 
 func _ready():
-	active_weapon();
+	selected_weapon();
 
 func _physics_process(delta):
 	if FLOATING_TAB == false: # Display floating tab image above item drop
@@ -32,7 +32,7 @@ func pick_up_item(body):
 	being_picked_up = true
 	
 func item_absorption(delta):
-	active_weapon();
+	selected_weapon();
 	if weapon.ammo != weapon.max_ammo:
 		if (playerDetection.can_see_player() && ABSORBABLE == true):
 			player = playerDetection.player;
@@ -60,7 +60,7 @@ func ammo():
 		weapon.ammo += weapon.max_magazine_size;
 		weapon.ammo = weapon.ammo;
 		
-func active_weapon():
+func selected_weapon():
 	if PISTOL9MM == true:
 		weapon = PlayerWeapons.get_node("Pistol9mm");
 	if MP7 == true:

@@ -17,6 +17,7 @@ enum {
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO;
 var state = CHASE;
+var active = false;
 var player_follow = 0
 var starting_position;
 var direction;
@@ -34,34 +35,35 @@ func _ready():
 	state = pick_random_state([IDLE, WANDER]);
 
 func _physics_process(delta):
-	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta);
-	knockback = move_and_slide(knockback);
-	velocity = move_and_slide(velocity);
-	
-	match state:
-		IDLE:
-			idle_point(wanderController.target_position, delta);
-			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta);
-			seek_player();
-			if wanderController.get_time_left() == 0:
-				update_wander();
-			
-		WANDER:
-			seek_player();
-			wander_towards_point(wanderController.target_position, delta)
-			if wanderController.get_time_left() == 0:
-				update_wander();
-			if global_position.distance_to(wanderController.target_position) <= MAX_SPEED * delta:
-				update_wander();
-			velocity = move_and_slide(velocity);
-			
-		CHASE:
-			player = playerDetection.player;
-			if player != null:
-				chase_towards_point(player.global_position, delta, false)
-			else:
-				chase_towards_point(starting_position, delta, true)
-			stand_next_to();
+	if active:
+		knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta);
+		knockback = move_and_slide(knockback);
+		velocity = move_and_slide(velocity);
+		
+		match state:
+			IDLE:
+				idle_point(wanderController.target_position, delta);
+				velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta);
+				seek_player();
+				if wanderController.get_time_left() == 0:
+					update_wander();
+				
+			WANDER:
+				seek_player();
+				wander_towards_point(wanderController.target_position, delta)
+				if wanderController.get_time_left() == 0:
+					update_wander();
+				if global_position.distance_to(wanderController.target_position) <= MAX_SPEED * delta:
+					update_wander();
+				velocity = move_and_slide(velocity);
+				
+			CHASE:
+				player = playerDetection.player;
+				if player != null:
+					chase_towards_point(player.global_position, delta, false)
+				else:
+					chase_towards_point(starting_position, delta, true)
+				stand_next_to();
 			
 func idle_point(area, delta):
 	direction = global_position.direction_to(area);
@@ -138,3 +140,9 @@ func _on_Stats_no_health():
 	var enemyDeathEffect = EnemyDeathEffect.instance();
 	get_parent().add_child(enemyDeathEffect);
 	enemyDeathEffect.global_position = global_position;
+
+func _on_VisibilityNotifier2D_screen_entered():
+	active = true;
+
+func _on_VisibilityNotifier2D_screen_exited():
+	active = false;

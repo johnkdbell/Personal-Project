@@ -20,57 +20,62 @@ var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO;
 var state = CHASE;
 var player_follow = 0
+var active = false;
 var starting_position;
 var direction;
 var player;
 
 onready var sprite = $WalkAnimation;
 onready var playerDetection = $PlayerDetection;
+onready var coverObjectDetection = $CoverObjectDetection;
 onready var closeToPlayer = $CloseToPlayer;
+onready var closeToCoverObject = $CloseToCoverObject;
 onready var wanderController = $WanderController;
 onready var hurtbox = $Hurtbox;
 onready var stats = $Stats;
 
-onready var player_carl = get_node("/root/World/YSort/Player");
 
 func _ready():
 	starting_position = get_global_position();
 	state = pick_random_state([IDLE, WANDER]);
 
 func _physics_process(delta):
-	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta);
-	knockback = move_and_slide(knockback);
-	velocity = move_and_slide(velocity);
-	
-	match state:
-		IDLE:
-			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta);
-			sprite.stop();
-			sprite.frame = 0;
-			seek_player();
-			bullet_spawn()
-			if wanderController.get_time_left() == 0:
-				update_wander();
-			
-		WANDER:
-			seek_player();
-			wander_towards_point(wanderController.target_position, delta)			
-			if wanderController.get_time_left() == 0:
-				update_wander();
-			if global_position.distance_to(wanderController.target_position) <= MAX_SPEED * delta:
-				update_wander();
-			velocity = move_and_slide(velocity);
-			
-		CHASE:
-			player = playerDetection.player;
-			if player != null:
-				chase_towards_point(player.global_position, delta, false)
-			else:
-				chase_towards_point(starting_position, delta, true)
-			stand_next_to();
-			
-		ATTACK:
-			pass
+	if active:
+		knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta);
+		knockback = move_and_slide(knockback);
+		velocity = move_and_slide(velocity);
+		
+		match state:
+			IDLE:
+				velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta);
+				sprite.stop();
+				sprite.frame = 0;
+				seek_player();
+				if wanderController.get_time_left() == 0:
+					update_wander();
+				
+			WANDER:
+				seek_player();
+				wander_towards_point(wanderController.target_position, delta)			
+				if wanderController.get_time_left() == 0:
+					update_wander();
+				if global_position.distance_to(wanderController.target_position) <= MAX_SPEED * delta:
+					update_wander();
+				velocity = move_and_slide(velocity);
+				
+			CHASE:
+				player = playerDetection.player;
+				if player != null:
+					chase_towards_point(player.global_position, delta, false)
+					if self.get_time_left() == 0:
+						$Timer.start()
+				else:
+					chase_towards_point(starting_position, delta, true)
+					$Timer.stop()
+				stand_next_to();
+				
+			ATTACK:
+				pass
 
 func wander_towards_point(area, delta):
 	direction = global_position.direction_to(area);
@@ -96,6 +101,10 @@ func animate_while_moving(delta, returning_home):
 func seek_player():
 	if playerDetection.can_see_player():
 		state = CHASE;
+		
+#func seek_cover_object():
+#	if coverObjectDetection.can_see_cover_object():
+#		state = CHASE;
 
 func update_wander():
 	state = pick_random_state([IDLE, WANDER]);
@@ -127,7 +136,7 @@ func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage;
 	knockback = area.knockback_vector * (KNOCKBACK_AMOUNT * 10);
 	hurtbox.create_hit_effect();
-	
+	$AnimationPlayer.play("FlashDamage")
 	var blood_instance = blood.instance();
 	get_tree().current_scene.add_child(blood_instance);
 	blood_instance.global_position = global_position;
@@ -142,17 +151,26 @@ func _on_Stats_no_health():
 	get_parent().add_child(enemyDeathEffect);
 	enemyDeathEffect.global_position = global_position;
 
+func get_time_left():
+	return $Timer.time_left;
 
 func _on_Timer_timeout():
 	bullet_spawn();
 	
 func bullet_spawn():
-	if player_carl:
+	if player:
 		var bullet := enemy_bullet.instance();
-		bullet.dir = get_angle_to(player_carl.position + Vector2(0.5,0.5));
-		bullet.rotation = get_angle_to(player_carl.position);
+		bullet.dir = get_angle_to(player.position + Vector2(0.5,0.5));
+		bullet.rotation = get_angle_to(player.position);
 		bullet.global_position = position;
-		print(bullet.damage)
 		get_parent().add_child(bullet);
 	else:
 		pass
+
+func _on_VisibilityNotifier2D_screen_entered():
+	active = true;
+
+func _on_VisibilityNotifier2D_screen_exited():
+	active = false;
+
+

@@ -8,6 +8,7 @@ func _ready():
 	active_weapon.show()
 
 func _physics_process(delta):
+	active_weapon.look_at(get_global_mouse_position());
 	if weapon.magazine_size <= 0:
 		if weapon.ammo > 0:
 			if weapon.ammo >= weapon.max_magazine_size:
@@ -44,9 +45,9 @@ func bullet_spawn():
 			
 func input():
 	if Input.is_action_just_released("mp7"):
-		weapon("MP7", $MP7);
+		selected_weapon("MP7", $MP7);
 	elif Input.is_action_just_released("pistol9mm"):
-		weapon("Pistol9mm", $Pistol9mm);		
+		selected_weapon("Pistol9mm", $Pistol9mm);		
 	if Input.is_action_pressed("right_mouse_button"):
 		if Input.is_action_pressed("left_mouse_button"):
 			shoot();
@@ -59,7 +60,7 @@ func reload():
 			weapon.ammo -= remaing_magazine_size;
 			weapon.magazine_size += remaing_magazine_size;
 
-func weapon(weapon_name, weapon_node):
+func selected_weapon(weapon_name, weapon_node):
 	active_weapon.hide();
 	weapon = PlayerWeapons.get_node(weapon_name);
 	active_weapon = weapon_node;

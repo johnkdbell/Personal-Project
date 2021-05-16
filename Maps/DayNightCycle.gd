@@ -4,7 +4,7 @@ var timer;
 var minute = 0;
 var hour = 0;
 var day = 0;
-var smooth_hour = 0;
+var smooth_hour = 3;
 
 func _process(_delta):
 	

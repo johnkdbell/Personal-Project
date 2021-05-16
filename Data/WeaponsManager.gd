@@ -22,6 +22,7 @@ onready var projectileDelayTimer := $ProjectileDelayTimer;
 func _ready():
 	self.magazine_size = magazine_size;	
 	self.ammo = ammo;
+	print(self.name)
 	
 func set_max_ammo(value):
 	max_ammo = value;

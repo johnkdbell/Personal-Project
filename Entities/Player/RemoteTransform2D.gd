@@ -9,7 +9,7 @@ onready var timer := get_parent().get_node("Timer");
 func _physics_process(delta):
 	if Input.is_action_pressed("right_mouse_button"):
 		aim_camera(delta);
-		get_parent().get_node("RemoteTransform2D/Camera2D").smoothing_speed = 4;
+		get_parent().get_node("Camera2D").smoothing_speed = 4;
 	else:
 		smooth_camera();
 
@@ -43,8 +43,8 @@ func smooth_camera():
 		start(0.5)
 
 func drag(setting):
-	get_parent().get_node("RemoteTransform2D/Camera2D").drag_margin_v_enabled = setting;
-	get_parent().get_node("RemoteTransform2D/Camera2D").drag_margin_h_enabled = setting;
+	get_parent().get_node("Camera2D").drag_margin_v_enabled = setting;
+	get_parent().get_node("Camera2D").drag_margin_h_enabled = setting;
 	
 func start(duration = 0.5):
 	timer.wait_time = duration;
@@ -54,6 +54,6 @@ func _on_Timer_timeout():
 	timer.stop();
 #	position.x = clamp(position.x, 50, -50);
 #	position.y = clamp(position.y, 50, -50);
-	get_parent().get_node("RemoteTransform2D/Camera2D").smoothing_speed = 1;
+	get_parent().get_node("Camera2D").smoothing_speed = 1;
 	
 	

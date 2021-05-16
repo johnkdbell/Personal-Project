@@ -69,7 +69,7 @@ max_health = 6
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
 animation = "walk"
-frame = 4
+frame = 2
 playing = true
 
 [node name="Shadow" type="Sprite" parent="."]
@@ -85,9 +85,8 @@ wander_range = 128
 [node name="RayCast2D" type="RayCast2D" parent="."]
 visible = false
 
-[node name="Collider" type="CollisionShape2D" parent="." groups=[
-"Enemies",
-]]
+[node name="Collider" type="CollisionShape2D" parent="."]
+visible = false
 modulate = Color( 0, 1, 0.694118, 1 )
 shape = SubResource( 7 )
 
@@ -106,9 +105,7 @@ position = Vector2( 0, 4 )
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
 shape = SubResource( 9 )
 
-[node name="Hurtbox" parent="." groups=[
-"Enemies",
-] instance=ExtResource( 6 )]
+[node name="Hurtbox" parent="." instance=ExtResource( 6 )]
 visible = false
 modulate = Color( 1, 0, 0.843137, 1 )
 collision_layer = 8
@@ -123,8 +120,13 @@ damage = 10
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 11 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+scale = Vector2( 3, 3 )
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 
 [editable path="PlayerDetection"]
 

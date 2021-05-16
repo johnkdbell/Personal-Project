@@ -7,7 +7,7 @@ var flashlight_active = true;
 onready var heartUIFull = $HeartUIFull;
 onready var heartUIEmpty = $HeartUIEmpty;
 
-func _process(delta):
+func _process(_delta):
 	input();
 
 func set_flashlight(value):
